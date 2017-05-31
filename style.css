@@ -1,0 +1,58 @@
+html {
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+p {
+  text-align: center;
+}
+
+.calc-container {
+  margin: 20px auto;
+  width: 200px;
+  background-color: coral;
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.screen {
+  text-align: right;
+  background-color: white;
+  height: 40px;
+  line-height: 40px;
+  padding: 10px;
+}
+
+.buttons {
+  width: 100%;
+}
+
+.top-buttons {
+  background: lightgray;
+}
+
+.zero {
+  width: 100px;
+  text-align: right;
+  padding-right: 22px;
+}
+
+.op-buttons {
+  background: orange;
+}
+
+button {
+  width: 50px;
+  height: 30px;
+  border: none;
+  float: left;
+  font-size: 75%;
+  outline: none;
+}
+
+button:hover,
+button:active {
+  cursor: pointer;
+  background: darkgray;
+}
