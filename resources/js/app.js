@@ -1,11 +1,7 @@
-$(document).ready(function(){
-  console.log('**document ready**');
-
-  // stored value
+$(document).ready(function() {
   var current = "0",
-      stored = [];
-
-  // event listeners
+      stored = [],
+      tempValue = false;
 
   // top buttons
   $('.ac-btn').click(function(){
@@ -13,6 +9,7 @@ $(document).ready(function(){
     current = "0";
     $('.screen').text(current);
     stored = [];
+    console.log(stored);
   });
 
   $('.negate-btn').click(function(){
@@ -32,18 +29,20 @@ $(document).ready(function(){
     console.log('equals button clicked');
     stored.push(current);
     var result = stored.join(' ');
-    console.log(result);
     current = eval(result);
+    tempValue = true;
+    console.log(result + ' = ' + current);
     $('.screen').text(current);
+    stored = [];
   });
 
   // number pad
   $('.num-pad').each(function() {
-    console.log($(this).text());
     var element = $(this).text();
     $(this).click(function(){
-      if(current === "0"){
+      if(current === "0" || tempValue){
         current = "";
+        tempValue = false;
       }
       console.log(element + " button clicked");
       current += element;
@@ -54,7 +53,6 @@ $(document).ready(function(){
 
   // operator buttons
   $('.basic-ops').each(function() {
-    console.log($(this).text());
     var op = $(this).text();
     $(this).click(function() {
       var opObj = { "−": "-", "×": "*", "÷": '/'}
@@ -62,6 +60,7 @@ $(document).ready(function(){
         op = opObj[op];
         console.log(op);
       }
+      console.log(op + " button clicked");
       stored.push(current);
       stored.push(op);
       current = "0";
