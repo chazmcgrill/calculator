@@ -1,9 +1,13 @@
 $(document).ready(function() {
-  var current = "0",
+  var current = '0',
       stored = [],
       tempValue = false;
 
-  // top buttons
+  // DECIMAL VALUE FIX
+  // SCREEN SIZE
+  // UNIT SEPERATORS
+
+  // clear button
   $('.ac-btn').click(function(){
     var acStatus = $('.ac-btn').text();
     if (acStatus === 'C') {
@@ -18,8 +22,9 @@ $(document).ready(function() {
     console.log(stored);
   });
 
+  // negate button
   $('.negate-btn').click(function(){
-    if (current.indexOf('-') === -1 && current !== "0") {
+    if (current.indexOf('-') === -1 && current !== '0') {
       current = '-' + current;
     } else {
       current = current.replace('-', '');
@@ -27,10 +32,18 @@ $(document).ready(function() {
     $('.screen').text(current);
   });
 
+  // percent button
   $('.percent-btn').click(function(){
-    console.log('percent button clicked');
+    var len = stored.length;
+    if(len < 2) {
+      current = current / 100;
+    } else {
+      current = (stored[len - 2] / 100) * current;
+    }
+    $('.screen').text(current);
   });
 
+  // equals button
   $('.equals-btn').click(function(){
     console.log('equals button clicked');
     stored.push(current);
@@ -62,15 +75,17 @@ $(document).ready(function() {
   $('.basic-ops').each(function() {
     var op = $(this).text();
     $(this).click(function() {
-      var opObj = { '−': '-', '×': '*', '÷': '/'}
+      var opObj = { '−': '-', '×': '*', '÷': '/' },
+          tempCurrent;
       if (op === '−' || op === '×' || op === '÷') {
         op = opObj[op];
       }
       console.log(op + ' button clicked');
       stored.push(current);
       stored.push(op);
+      tempCurrent = current;
       current = '0';
-      $('.screen').text(current);
+      $('.screen').text(tempCurrent);
       console.log(stored);
     });
   });
