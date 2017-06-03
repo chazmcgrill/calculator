@@ -3,9 +3,9 @@ $(document).ready(function() {
       stored = [],
       tempValue = false;
 
-  // DECIMAL VALUE FIX
+  // DECIMAL VALUE FIX // Duplicating decimals
   // SCREEN SIZE
-  // UNIT SEPERATORS
+  // sum needs to show after basic ops used then another basic ops used
 
   // clear button
   $('.ac-btn').click(function(){
@@ -18,7 +18,7 @@ $(document).ready(function() {
       console.log('all-clear button clicked');
       stored = [];
     }
-    $('.screen').text(current);
+    screen(current);
     console.log(stored);
   });
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
     } else {
       current = current.replace('-', '');
     }
-    $('.screen').text(current);
+    screen(current);
   });
 
   // percent button
@@ -40,7 +40,7 @@ $(document).ready(function() {
     } else {
       current = (stored[len - 2] / 100) * current;
     }
-    $('.screen').text(current);
+    screen(current);
   });
 
   // equals button
@@ -48,10 +48,10 @@ $(document).ready(function() {
     console.log('equals button clicked');
     stored.push(current);
     var result = stored.join(' ');
-    current = eval(result);
+    current = String(eval(result));
     tempValue = true;
     console.log(result + ' = ' + current);
-    $('.screen').text(current);
+    screen(current);
     stored = [];
   });
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
       }
       console.log(element + " button clicked");
       current += element;
-      $('.screen').text(current);
+      screen(current);
       $('.ac-btn').text('C');
       console.log(Number(current));
     });
@@ -85,9 +85,29 @@ $(document).ready(function() {
       stored.push(op);
       tempCurrent = current;
       current = '0';
-      $('.screen').text(tempCurrent);
+      console.log(tempCurrent);
+      screen(tempCurrent);
       console.log(stored);
     });
   });
+
+  // function that finalises screen value
+  function screen(val) {
+    console.log('val = ' + val);
+    if(val.length > 3) {
+      console.log('over 3 characters');
+      val = comma(val);
+    }
+    $('.screen').text(val);
+  }
+
+  // add commas for evry 3rd characters
+  function comma(x) {
+    var int = x.split('.');
+    if (int[0].length > 3) {
+      int[0] = int[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    return int.join('.');
+  }
 
 });
