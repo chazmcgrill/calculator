@@ -3,9 +3,10 @@ $(document).ready(function() {
       stored = [],
       tempValue = false;
 
-  // DECIMAL VALUE FIX // Duplicating decimals
-  // SCREEN SIZE
+  // DECIMAL VALUE FIX??
+  // SCREEN SIZE LIMIT - 13 chars
   // sum needs to show after basic ops used then another basic ops used
+  // if stored lenght > 3 the do equals
 
   // clear button
   $('.ac-btn').click(function(){
@@ -71,21 +72,28 @@ $(document).ready(function() {
     });
   });
 
+  // decimal button
+  $('.decimal-btn').click(function(){
+    if (current.indexOf('.') === -1) {
+      current += '.';
+      screen(current);
+    }
+  });
+
   // operator buttons
   $('.basic-ops').each(function() {
     var op = $(this).text();
     $(this).click(function() {
       var opObj = { '−': '-', '×': '*', '÷': '/' },
           tempCurrent;
-      if (op === '−' || op === '×' || op === '÷') {
-        op = opObj[op];
-      }
+
+      op = opObj[op] || '+';
       console.log(op + ' button clicked');
+
       stored.push(current);
       stored.push(op);
       tempCurrent = current;
       current = '0';
-      console.log(tempCurrent);
       screen(tempCurrent);
       console.log(stored);
     });
@@ -101,7 +109,7 @@ $(document).ready(function() {
     $('.screen').text(val);
   }
 
-  // add commas for evry 3rd characters
+  // add commas for every 3rd characters
   function comma(x) {
     var int = x.split('.');
     if (int[0].length > 3) {
