@@ -6,10 +6,17 @@
 */
 
 html {
+  font-family: 'Arvo', serif;
   font-size: 20px;
   background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-  height: 100%;
-  font-family: 'Arvo', serif;
+  background-size: cover;
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 h1 {
@@ -73,4 +80,29 @@ button:active {
 .op-buttons:hover,
 .op-buttons:active {
   background: #2d8887;
+}
+
+/* footer */
+
+p { font-size: 10px; }
+i, a { color: black; }
+a { text-decoration: none; }
+
+.icons {
+  width: 150px;
+  margin: 0 auto 10px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  height: 70px;
+  text-align: center;
+}
+
+.footer i:hover,
+.footer a:hover {
+  color: #3e98ac;
 }
