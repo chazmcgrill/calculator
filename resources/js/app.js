@@ -3,10 +3,8 @@ $(document).ready(function() {
       stored = [],
       tempValue = false;
 
-  // DECIMAL VALUE FIX??
-  // SCREEN SIZE LIMIT - 13 chars
-  // sum needs to show after basic ops used then another basic ops used
-  // if stored lenght > 3 the do equals
+  // SCREEN SIZE LIMIT DECIMALS
+  // PHONE LANDSCAPE BG NOT STRETCHING
 
   // clear button
   $('.ac-btn').click(function(){
@@ -36,7 +34,7 @@ $(document).ready(function() {
   // percent button
   $('.percent-btn').click(function(){
     var len = stored.length;
-    if(len < 2) {
+    if (len < 2) {
       current = current / 100;
     } else {
       current = (stored[len - 2] / 100) * current;
@@ -60,7 +58,7 @@ $(document).ready(function() {
   $('.num-pad').each(function() {
     var element = $(this).text();
     $(this).click(function(){
-      if(current === '0' || tempValue){
+      if (current === '0' || tempValue) {
         current = '';
         tempValue = false;
       }
@@ -82,29 +80,44 @@ $(document).ready(function() {
 
   // operator buttons
   $('.basic-ops').each(function() {
-    var op = $(this).text();
     $(this).click(function() {
-      var opObj = { '−': '-', '×': '*', '÷': '/' },
+      var opObj = { '−': '-', '×': '*', '÷': '/', '+': '+'},
+          op = $(this).text(),
           tempCurrent;
 
-      op = opObj[op] || '+';
+      op = opObj[op];
       console.log(op + ' button clicked');
-
       stored.push(current);
+
+      if (stored.length > 2) {
+        console.log('show added sum');
+        var result = stored.join(' ');
+        tempCurrent = String(eval(result));
+        // stored.push(op);
+      } else {
+        tempCurrent = current;
+        // stored.push(op);
+      }
       stored.push(op);
-      tempCurrent = current;
       current = '0';
       screen(tempCurrent);
       console.log(stored);
+
     });
   });
 
   // function that finalises screen value
   function screen(val) {
     console.log('val = ' + val);
-    if(val.length > 3) {
+    if (val.length > 3) {
       console.log('over 3 characters');
       val = comma(val);
+    }
+    // screen overflow
+    if (val.length > 16) {
+      y = 13 - val.length
+      val = val.slice(0, y);
+      val += 'e+' + Math.abs(y);
     }
     $('.screen').text(val);
   }
@@ -117,5 +130,6 @@ $(document).ready(function() {
     }
     return int.join('.');
   }
+
 
 });
