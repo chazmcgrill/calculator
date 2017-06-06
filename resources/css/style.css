@@ -1,12 +1,5 @@
-/*
-#379392
-#4FB0C6
-#4F86C6
-#6C49B8
-*/
-
 html {
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
   font-size: 20px;
   background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
   background-size: cover;
@@ -31,7 +24,7 @@ h1 {
   background: #4FB0C6;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 2px 2px 6px 2px rgba(133,133,133,.5);
+  box-shadow: 2px 2px 6px 2px rgba(133, 133, 133, 0.5);
 }
 
 .screen {
@@ -70,29 +63,37 @@ button {
   font-size: 90%;
   outline: none;
 }
-
-button:hover,
-button:active {
+button:hover, button:active {
   cursor: pointer;
   background: #3e98ac;
 }
 
-.op-buttons:hover,
-.op-buttons:active {
+.op-buttons:hover, .op-buttons:active {
   background: #2d8887;
 }
 
 /* footer */
+p {
+  font-size: 10px;
+}
 
-p { font-size: 10px; }
-i, a { color: black; }
-a { text-decoration: none; }
+i {
+  color: black;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
 
 .icons {
   width: 150px;
   margin: 0 auto 10px auto;
   display: flex;
   justify-content: space-between;
+}
+.icons i {
+  font-size: 90%;
 }
 
 .footer {
@@ -101,8 +102,6 @@ a { text-decoration: none; }
   height: 70px;
   text-align: center;
 }
-
-.footer i:hover,
-.footer a:hover {
+.footer i:hover, .footer a:hover {
   color: #3e98ac;
 }

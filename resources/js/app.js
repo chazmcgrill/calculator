@@ -1,10 +1,11 @@
 $(document).ready(function() {
-  var current = '0',
+  var opObj = { '−': '-', '×': '*', '÷': '/', '+': '+'},
+      current = '0',
       stored = [],
-      tempValue = false;
+      tempFlag = false,
+      decimalFlag = false;
 
-  // SCREEN SIZE LIMIT DECIMALS
-  // PHONE LANDSCAPE BG NOT STRETCHING
+  // SCREEN SIZE LIMIT DECIMALS - 14
 
   // clear button
   $('.ac-btn').click(function(){
@@ -48,7 +49,7 @@ $(document).ready(function() {
     stored.push(current);
     var result = stored.join(' ');
     current = String(eval(result));
-    tempValue = true;
+    tempFlag = true;
     console.log(result + ' = ' + current);
     screen(current);
     stored = [];
@@ -58,9 +59,9 @@ $(document).ready(function() {
   $('.num-pad').each(function() {
     var element = $(this).text();
     $(this).click(function(){
-      if (current === '0' || tempValue) {
+      if (current === '0' || tempFlag) {
         current = '';
-        tempValue = false;
+        tempFlag = false;
       }
       console.log(element + " button clicked");
       current += element;
@@ -81,8 +82,7 @@ $(document).ready(function() {
   // operator buttons
   $('.basic-ops').each(function() {
     $(this).click(function() {
-      var opObj = { '−': '-', '×': '*', '÷': '/', '+': '+'},
-          op = $(this).text(),
+      var op = $(this).text(),
           tempCurrent;
 
       op = opObj[op];
@@ -90,14 +90,12 @@ $(document).ready(function() {
       stored.push(current);
 
       if (stored.length > 2) {
-        console.log('show added sum');
         var result = stored.join(' ');
         tempCurrent = String(eval(result));
-        // stored.push(op);
       } else {
         tempCurrent = current;
-        // stored.push(op);
       }
+
       stored.push(op);
       current = '0';
       screen(tempCurrent);
@@ -118,6 +116,7 @@ $(document).ready(function() {
       y = 13 - val.length
       val = val.slice(0, y);
       val += 'e+' + Math.abs(y);
+      // val = decimal(val);
     }
     $('.screen').text(val);
   }
@@ -131,5 +130,14 @@ $(document).ready(function() {
     return int.join('.');
   }
 
+  // // decimal rounder
+  // function decimal(num) {
+  //   var int = num.split('.'),
+  //       dif = 15 - int[0].length,
+  //       val = Number(num);
+  //   num = String(val.toFixed(dif));
+  //   console.log("num = " + num);
+  //   return num;
+  // }
 
 });
