@@ -6,6 +6,7 @@ $(document).ready(function() {
       decimalFlag = false;
 
   // SCREEN SIZE LIMIT DECIMALS - 14
+  // Refactor using closures
 
   // clear button
   $('.ac-btn').click(function(){
@@ -64,9 +65,14 @@ $(document).ready(function() {
         tempFlag = false;
       }
       console.log(element + " button clicked");
-      current += element;
-      screen(current);
-      $('.ac-btn').text('C');
+      // stop if length limit is reached
+      if (current.length < 15) {
+        current += element;
+        screen(current);
+        $('.ac-btn').text('C');
+      } else {
+        console.log('maximum characters reached');
+      }
       console.log(Number(current));
     });
   });
@@ -76,6 +82,7 @@ $(document).ready(function() {
     if (current.indexOf('.') === -1) {
       current += '.';
       screen(current);
+      decimalFlag = true;
     }
   });
 
@@ -104,31 +111,33 @@ $(document).ready(function() {
     });
   });
 
-  // function that finalises screen value
-  function screen(val) {
-    console.log('val = ' + val);
-    if (val.length > 3) {
-      console.log('over 3 characters');
-      val = comma(val);
-    }
-    // screen overflow
-    if (val.length > 16) {
-      y = 13 - val.length
-      val = val.slice(0, y);
-      val += 'e+' + Math.abs(y);
-      // val = decimal(val);
-    }
-    $('.screen').text(val);
-  }
-
-  // add commas for every 3rd characters
-  function comma(x) {
-    var int = x.split('.');
-    if (int[0].length > 3) {
-      int[0] = int[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-    }
-    return int.join('.');
-  }
+  // // function that finalises screen value
+  // function screen(val) {
+  //   console.log('val = ' + val);
+  //   if (val.length > 3) {
+  //     console.log('over 3 characters');
+  //     val = comma(val);
+  //   }
+  //   // screen overflow
+  //   if (val.length > 16) {
+  //     y = 13 - val.length
+  //     val = val.slice(0, y);
+  //     val += 'e+' + Math.abs(y);
+  //   }
+  //   if (val.length > 16 && decimalFlag) {
+  //     console.log('hello');
+  //   }
+  //   $('.screen').text(val);
+  // }
+  //
+  // // add commas for every 3rd characters
+  // function comma(x) {
+  //   var int = x.split('.');
+  //   if (int[0].length > 3) {
+  //     int[0] = int[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+  //   }
+  //   return int.join('.');
+  // }
 
   // // decimal rounder
   // function decimal(num) {
@@ -139,5 +148,33 @@ $(document).ready(function() {
   //   console.log("num = " + num);
   //   return num;
   // }
+
+  function screen(value) {
+    console.log('pre screen value = ' + value);
+    var int = value.split('.'),
+        len = int[0].length;
+    // int[0] = comma(int[0]);
+    if (int[1] && value.length > 13) {
+      value = int.join('.');
+      value = rounder(value, len);
+    } else {
+      value = int.join('.');
+    }
+    console.log(int);
+    $('.screen').text(value);
+  }
+
+  function comma(val) {
+    val = val.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    return val;
+  }
+
+  function rounder(val, len) {
+    console.log('hello');
+    val = Number(val);
+    val = val.toFixed(14 - len);
+    console.log('rounded val = ' + val);
+    return val;
+  }
 
 });
