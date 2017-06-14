@@ -1,26 +1,20 @@
 $(document).ready(function() {
   var opObj = { '−': '-', '×': '*', '÷': '/', '+': '+'},
-      current = '0',
-      stored = [],
       tempFlag = false,
-      decimalFlag = false;
+      current = '0',
+      stored = [];
 
-  // SCREEN SIZE LIMIT DECIMALS - 14
-  // Refactor using closures
 
   // clear button
   $('.ac-btn').click(function(){
     var acStatus = $('.ac-btn').text();
     if (acStatus === 'C') {
-      console.log('clear button clicked');
       current = '0';
       $('.ac-btn').text('AC');
     } else {
-      console.log('all-clear button clicked');
       stored = [];
     }
     screen(current);
-    console.log(stored);
   });
 
   // negate button
@@ -46,12 +40,10 @@ $(document).ready(function() {
 
   // equals button
   $('.equals-btn').click(function(){
-    console.log('equals button clicked');
     stored.push(current);
     var result = stored.join(' ');
     current = String(eval(result));
     tempFlag = true;
-    console.log(result + ' = ' + current);
     screen(current);
     stored = [];
   });
@@ -64,25 +56,22 @@ $(document).ready(function() {
         current = '';
         tempFlag = false;
       }
-      console.log(element + " button clicked");
       // stop if length limit is reached
       if (current.length < 15) {
         current += element;
         screen(current);
         $('.ac-btn').text('C');
       } else {
-        console.log('maximum characters reached');
+        console.log('maximum characters reached'); // ADD SCREEN DISPLAY
       }
-      console.log(Number(current));
     });
   });
 
-  // decimal button
+  // decimal button (apply if not present)
   $('.decimal-btn').click(function(){
     if (current.indexOf('.') === -1) {
       current += '.';
       screen(current);
-      decimalFlag = true;
     }
   });
 
@@ -91,89 +80,51 @@ $(document).ready(function() {
     $(this).click(function() {
       var op = $(this).text(),
           tempCurrent;
-
       op = opObj[op];
-      console.log(op + ' button clicked');
       stored.push(current);
-
       if (stored.length > 2) {
         var result = stored.join(' ');
         tempCurrent = String(eval(result));
       } else {
         tempCurrent = current;
       }
-
       stored.push(op);
       current = '0';
       screen(tempCurrent);
-      console.log(stored);
-
     });
   });
 
-  // // function that finalises screen value
-  // function screen(val) {
-  //   console.log('val = ' + val);
-  //   if (val.length > 3) {
-  //     console.log('over 3 characters');
-  //     val = comma(val);
-  //   }
-  //   // screen overflow
-  //   if (val.length > 16) {
-  //     y = 13 - val.length
-  //     val = val.slice(0, y);
-  //     val += 'e+' + Math.abs(y);
-  //   }
-  //   if (val.length > 16 && decimalFlag) {
-  //     console.log('hello');
-  //   }
-  //   $('.screen').text(val);
-  // }
-  //
-  // // add commas for every 3rd characters
-  // function comma(x) {
-  //   var int = x.split('.');
-  //   if (int[0].length > 3) {
-  //     int[0] = int[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-  //   }
-  //   return int.join('.');
-  // }
-
-  // // decimal rounder
-  // function decimal(num) {
-  //   var int = num.split('.'),
-  //       dif = 15 - int[0].length,
-  //       val = Number(num);
-  //   num = String(val.toFixed(dif));
-  //   console.log("num = " + num);
-  //   return num;
-  // }
-
+  // function to deal with screen output
   function screen(value) {
-    console.log('pre screen value = ' + value);
-    var int = value.split('.'),
-        len = int[0].length;
-    // int[0] = comma(int[0]);
-    if (int[1] && value.length > 13) {
-      value = int.join('.');
-      value = rounder(value, len);
-    } else {
-      value = int.join('.');
+    if ((value.indexOf('e') === -1)) {
+      var int = value.split('.'),
+      len = int[0].length;
+      // if decimal exceeds length round down
+      if (int[1] && int[1].length > 2 && value.length > 14) {
+        value = int.join('.');
+        value = rounder(value, len);
+      } else {
+        value = int.join('.');
+      }
+      value = comma(value);
     }
-    console.log(int);
     $('.screen').text(value);
   }
 
-  function comma(val) {
-    val = val.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-    return val;
+  // function to round down numbers if length exceeds screen size
+  function rounder(value, len) {
+    var decimals = 14 - len; // double check if number higher between 0-20 *********
+    value = Number(Math.round(value +'e'+ decimals) + 'e-' + decimals);
+    return String(value);
   }
 
-  function rounder(val, len) {
-    console.log('hello');
-    val = Number(val);
-    val = val.toFixed(14 - len);
-    console.log('rounded val = ' + val);
+  // function to add commas for large number visibility
+  function comma(val) {
+    var int = val.split('.');
+    if (int[0].length > 3) {
+      int[0] = int[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    val = int.join('.');
     return val;
   }
 
