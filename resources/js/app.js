@@ -4,7 +4,6 @@ $(document).ready(function() {
       current = '0',
       stored = [];
 
-
   // clear button
   $('.ac-btn').click(function(){
     var acStatus = $('.ac-btn').text();
@@ -18,7 +17,7 @@ $(document).ready(function() {
   });
 
   // negate button
-  $('.negate-btn').click(function(){
+  $('.negate-btn').click(function() {
     if (current.indexOf('-') === -1 && current !== '0') {
       current = '-' + current;
     } else {
@@ -28,18 +27,18 @@ $(document).ready(function() {
   });
 
   // percent button
-  $('.percent-btn').click(function(){
+  $('.percent-btn').click(function() {
     var len = stored.length;
     if (len < 2) {
       current = current / 100;
     } else {
-      current = (stored[len - 2] / 100) * current;
+      current = String((stored[len - 2] / 100) * current);
     }
     screen(current);
   });
 
   // equals button
-  $('.equals-btn').click(function(){
+  $('.equals-btn').click(function() {
     stored.push(current);
     var result = stored.join(' ');
     current = String(eval(result));
