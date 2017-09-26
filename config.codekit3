@@ -64,6 +64,16 @@
 		"oAP": "\/index.html",
 		"oF": 0
 		},
+	"\/old\/app.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/old\/app-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
 	"\/README.md": {
 		"cS": 0,
 		"eF": 1,
