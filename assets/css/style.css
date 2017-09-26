@@ -1,22 +1,20 @@
+@import url("https://fonts.googleapis.com/css?family=Arvo");
 html {
-  font-family: "Arvo", serif;
+  font-family: 'Arvo', serif;
   font-size: 20px;
   background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-  background-size: cover;
-}
+  background-size: cover; }
 
 .site {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  justify-content: space-between;
-}
+  justify-content: space-between; }
 
 h1 {
   text-align: center;
   font-size: 150%;
-  color: black;
-}
+  color: black; }
 
 .calc-container {
   margin: 40px auto;
@@ -24,8 +22,7 @@ h1 {
   background: #4FB0C6;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 2px 2px 6px 2px rgba(133, 133, 133, 0.5);
-}
+  box-shadow: 2px 2px 6px 2px rgba(133, 133, 133, 0.5); }
 
 .screen {
   text-align: right;
@@ -33,26 +30,21 @@ h1 {
   height: 40px;
   line-height: 40px;
   padding: 10px;
-  font-size: 105%;
-}
+  font-size: 150%; }
 
 .buttons {
-  width: 100%;
-}
+  width: 100%; }
 
 .zero-btn {
   width: 150px;
   text-align: right;
-  padding-right: 33px;
-}
+  padding-right: 33px; }
 
 .top-buttons {
-  background: #76b7c6;
-}
+  background: #76b7c6; }
 
 .op-buttons {
-  background: #379392;
-}
+  background: #379392; }
 
 button {
   background: #4FB0C6;
@@ -61,47 +53,37 @@ button {
   border: none;
   float: left;
   font-size: 90%;
-  outline: none;
-}
-button:hover, button:active {
-  cursor: pointer;
-  background: #3e98ac;
-}
+  outline: none; }
+  button:hover, button:active {
+    cursor: pointer;
+    background: #3e98ac; }
 
 .op-buttons:hover, .op-buttons:active {
-  background: #2d8887;
-}
+  background: #2d8887; }
 
 /* footer */
 p {
-  font-size: 10px;
-}
+  font-size: 10px; }
 
 i {
-  color: black;
-}
+  color: black; }
 
 a {
   color: black;
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 .icons {
   width: 150px;
   margin: 0 auto 10px auto;
   display: flex;
-  justify-content: space-between;
-}
-.icons i {
-  font-size: 90%;
-}
+  justify-content: space-between; }
+  .icons i {
+    font-size: 90%; }
 
 .footer {
   display: flex;
   justify-content: space-around;
   height: 70px;
-  text-align: center;
-}
-.footer i:hover, .footer a:hover {
-  color: #3e98ac;
-}
+  text-align: center; }
+  .footer i:hover, .footer a:hover {
+    color: #3e98ac; }
