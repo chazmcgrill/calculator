@@ -16,56 +16,79 @@ const OPS = {
 
 // variable object for input values
 var calc = {
-  currentOp: '',
-  currentVal: 'valA',
+  operator: '',
+  current: 'valA',
   valA: '',
   valB: ''
-  // reset: [ currentOp, valA, valB ]
 }
 
 // function for performing sum
 function equals(a, b) {
-  return OPS[calc.currentOp](Number(a), Number(b));
+  return OPS[calc.operator](Number(a), Number(b));
+}
+
+// updater function
+function updater(val) {
+  calc[calc.current] += val;
+  screenVal(calc[calc.current]);
+}
+
+function negator(val) {
+  if (val.indexOf('-') === -1 && val !== '0') {
+    val = '-' + val;
+  } else {
+    val = val.replace('-', '');
+  }
+  screenVal(val);
+  return val;
 }
 
 // screen display function
 function screenVal(val) {
   $('.screen').text(val);
 }
+// rounder function
+
+// commas function
+
+// length check
 
 // reset values
 function reset(valA) {
   calc.valA = valA;
   calc.valB = '';
-  calc.currentVal = 'valA';
+  calc.current = 'valA';
 }
-
-
-
 
 
 // ==============
 // CLICK EVENTS
 // ==============
 
-$('.num-pad').click(function(event) {
-  calc[calc.currentVal] += event.target.innerText;
-  screenVal(calc[calc.currentVal]);
+$('.basic-ops').click(function(event) {
+  calc.operator = event.target.id;
+  calc.current = 'valB';
 });
 
-$('.basic-ops').click(function(event) {
-  calc.currentOp = event.target.id;
-  calc.currentVal = 'valB';
+$('.num-pad').click(function(event) {
+  updater(event.target.innerText);
 });
 
 // negate
+$('.negate-btn').click(function() {
+  calc[calc.current] = negator(String(calc[calc.current]));
+});
 
 // percent
 
 // decimal
+$('.decimal-btn').click(function() {
+  if (calc[calc.current].indexOf('.') === -1) {
+    updater('.');
+  }
+});
 
 $('.ac-btn').click(function() {
-  // reset logic goes here
   screenVal('0');
   reset('');
 });
