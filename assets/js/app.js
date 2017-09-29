@@ -45,13 +45,31 @@ function negator(val) {
 
 // screen display function
 function screenVal(val) {
+  // check length and return reduced value.
+  val = length(val);
   $('.screen').text(val);
 }
+
+// length check decrease text size
+function length(val) {
+  if (val.length > 14) {
+    // do something
+  }
+  return val;
+}
+
 // rounder function
 
 // commas function
 
-// length check
+
+/* PERCENTAGE if valB is not populate simply divide by a
+hundred else calculate the valB's percentage of valA */
+function percent(val) {
+  calc[calc.current] = !calc.valB ? val / 100
+  : (calc.valA / 100) * val;
+  screenVal(calc[calc.current]);
+}
 
 // reset values
 function reset(valA) {
@@ -59,7 +77,6 @@ function reset(valA) {
   calc.valB = '';
   calc.current = 'valA';
 }
-
 
 // ==============
 // CLICK EVENTS
@@ -80,6 +97,9 @@ $('.negate-btn').click(function() {
 });
 
 // percent
+$('.percent-btn').click(function() {
+  percent(calc[calc.current]);
+});
 
 // decimal
 $('.decimal-btn').click(function() {
