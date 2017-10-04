@@ -45,15 +45,14 @@ function negator(val) {
 
 // screen display function
 function screenVal(val) {
-  // check length and return reduced value.
-  val = length(val);
+  val = lengthCheck(val);
   $('.screen').text(val);
 }
 
 // length check decrease text size
-function length(val) {
-  if (val.length > 14) {
-    // do something
+function lengthCheck(val) {
+  if (val.length > 3) {
+    val = commas(val);
   }
   return val;
 }
@@ -61,13 +60,20 @@ function length(val) {
 // rounder function
 
 // commas function
+function commas(val) {
+  var regex = /(\d)(?=(\d{3})+$)/g,
+      parts = val.split('.');
+
+  parts[0] = parts[0].replace(regex, '$1,');
+  return seperated.join('.');
+}
 
 
 /* PERCENTAGE if valB is not populate simply divide by a
 hundred else calculate the valB's percentage of valA */
 function percent(val) {
   calc[calc.current] = !calc.valB ? val / 100
-  : (calc.valA / 100) * val;
+    : (calc.valA / 100) * val;
   screenVal(calc[calc.current]);
 }
 
