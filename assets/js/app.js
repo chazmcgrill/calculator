@@ -57,7 +57,7 @@ function lengthCheck(val) {
   return val;
 }
 
-// rounder function
+// condenser function
 
 // commas function
 function commas(val) {
@@ -65,9 +65,8 @@ function commas(val) {
       parts = val.split('.');
 
   parts[0] = parts[0].replace(regex, '$1,');
-  return seperated.join('.');
+  return parts.join('.');
 }
-
 
 /* PERCENTAGE if valB is not populate simply divide by a
 hundred else calculate the valB's percentage of valA */
@@ -121,6 +120,6 @@ $('.ac-btn').click(function() {
 
 $('.equals-btn').click(function() {
   var val = equals(calc.valA, calc.valB);
-  screenVal(val);
+  screenVal(String(val));
   reset(val);
 });

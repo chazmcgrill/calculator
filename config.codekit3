@@ -38,6 +38,16 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/assets\/js\/app-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/assets\/js\/app-min-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
 	"\/assets\/js\/app.js": {
 		"ft": 64,
 		"ma": 0,
@@ -63,6 +73,16 @@
 		"oA": 2,
 		"oAP": "\/index.html",
 		"oF": 0
+		},
+	"\/old\/app-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/old\/app-min-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
 		},
 	"\/old\/app.js": {
 		"ft": 64,
