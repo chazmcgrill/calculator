@@ -58,11 +58,8 @@ function lengthCheck(val) {
 
 // clear button
 function clear() {
-  if (calc.valB) {
-    calc.valB = '';
-  } else {
-    reset('');
-  }
+  $('.ac-btn').text('AC');
+  calc.valB ? calc.valB = '' : reset('');
   screenVal('0');
 }
 
@@ -102,6 +99,7 @@ $('.basic-ops').click(function(event) {
 });
 
 $('.num-pad').click(function(event) {
+  $('.ac-btn').text('C'); // better place ?
   updater(event.target.innerText);
 });
 
