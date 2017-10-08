@@ -29,17 +29,16 @@ function equals(a, b) {
 
 // updater function
 function updater(val) {
+  if (!calc[calc.current] && val === '.') val = '0.';
   calc[calc.current] += val;
   screenVal(calc[calc.current]);
 }
 
 function negator(val) {
-  if (val.indexOf('-') === -1 && val !== '0') {
-    val = '-' + val;
-  } else {
-    val = val.replace('-', '');
+  if (val !== '0' && val !== '') {
+    val = val.indexOf('-') === -1 ? '-' + val : val.replace('-', '');
+    screenVal(val);
   }
-  screenVal(val);
   return val;
 }
 
@@ -55,6 +54,16 @@ function lengthCheck(val) {
     val = commas(val);
   }
   return val;
+}
+
+// clear button
+function clear() {
+  if (calc.valB) {
+    calc.valB = '';
+  } else {
+    reset('');
+  }
+  screenVal('0');
 }
 
 // condenser function
@@ -114,8 +123,7 @@ $('.decimal-btn').click(function() {
 });
 
 $('.ac-btn').click(function() {
-  screenVal('0');
-  reset('');
+  clear();
 });
 
 $('.equals-btn').click(function() {
