@@ -1,4 +1,6 @@
-// const  object for operations methods
+/* Object containing methods for basic
+operations. These a called on pressing
+equals button. */
 const OPS = {
   plus: function(a, b) {
     return a + b;
@@ -14,7 +16,8 @@ const OPS = {
   }
 }
 
-// variable object for input values
+/* Object to hold all the main data
+variables */
 var calc = {
   operator: 'plus',
   current: 'valA',
@@ -23,11 +26,15 @@ var calc = {
   equalsVal: 0
 }
 
-// function for performing sum
+// FUNCTIONS
+
+/* Equals function for performing sum using
+values and operator method selected. */
 function equals(a, b) {
   return OPS[calc.operator](Number(a), Number(b));
 }
 
+/* Equals value */
 function equalsVal() {
   if (calc.equalsVal) {
     return equals(calc.valA, calc.equalsVal);
@@ -37,7 +44,7 @@ function equalsVal() {
   }
 }
 
-// updater function
+/* Updater */
 function updater(val) {
   if (!calc[calc.current] && val === '.') val = '0.';
   if (calc.equalsVal) {
@@ -48,6 +55,7 @@ function updater(val) {
   screenVal(calc[calc.current]);
 }
 
+/* Negator */
 function negator(val) {
   if (val !== '0' && val !== '') {
     val = val.indexOf('-') === -1 ? '-' + val : val.replace('-', '');
@@ -56,13 +64,13 @@ function negator(val) {
   return val;
 }
 
-// screen display function
+/* Screen display updater */
 function screenVal(val) {
   val = lengthCheck(val);
   $('.screen').text(val);
 }
 
-// length check decrease text size
+/* Length filter */
 function lengthCheck(val) {
   if (val.length > 3) {
     val = commas(val);
@@ -70,14 +78,15 @@ function lengthCheck(val) {
   return val;
 }
 
-// clear button
+/* Clear button logic */
 function clear() {
   $('.ac-btn').text('AC');
   calc.valB ? calc.valB = '' : reset('');
   screenVal('0');
 }
 
-// commas function
+/* Add commas to screen value using regular
+expression replace method. */
 function commas(val) {
   var regex = /(\d)(?=(\d{3})+$)/g,
       parts = val.split('.');
@@ -86,56 +95,59 @@ function commas(val) {
   return parts.join('.');
 }
 
-/* PERCENTAGE if valB is not populate simply divide by a
-hundred else calculate the valB's percentage of valA */
+/* Percentage if valB is not populated simply
+divides by a hundred else calculates the valB's
+percentage of valA */
 function percent(val) {
   calc[calc.current] = !calc.valB ? val / 100
     : (calc.valA / 100) * val;
   screenVal(calc[calc.current]);
 }
 
-// reset values
+/* Reset values */
 function reset(valA) {
   calc.valA = valA;
   calc.valB = '';
   calc.current = 'valA';
 }
 
-// ==============
 // CLICK EVENTS
-// ==============
 
+/* Basic operations */
 $('.basic-ops').click(function(event) {
   calc.operator = event.target.id;
   calc.current = 'valB';
 });
 
+/* Numpad */
 $('.num-pad').click(function(event) {
   $('.ac-btn').text('C'); // better place ?
   updater(event.target.innerText);
 });
 
-// negate
+/* Negate button */
 $('.negate-btn').click(function() {
   calc[calc.current] = negator(String(calc[calc.current]));
 });
 
-// percent
+/* Percent */
 $('.percent-btn').click(function() {
   percent(calc[calc.current]);
 });
 
-// decimal
+/* Decimal */
 $('.decimal-btn').click(function() {
   if (calc[calc.current].indexOf('.') === -1) {
     updater('.');
   }
 });
 
+/* Clear button */
 $('.ac-btn').click(function() {
   clear();
 });
 
+/* Equals button */
 $('.equals-btn').click(function() {
   var val = equalsVal();
   screenVal(String(val));
