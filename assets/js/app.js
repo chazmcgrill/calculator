@@ -31,7 +31,10 @@ function equals(a, b) {
 // updater function
 function updater(val) {
   if (!calc[calc.current] && val === '.') val = '0.';
-  console.log(calc[calc.current]);
+  if (calc.equalsVal) {
+    calc[calc.current] = '';
+    calc.equalsVal = 0;
+  }
   calc[calc.current] += val;
   screenVal(calc[calc.current]);
 }
