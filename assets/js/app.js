@@ -28,6 +28,15 @@ function equals(a, b) {
   return OPS[calc.operator](Number(a), Number(b));
 }
 
+function equalsVal() {
+  if (calc.equalsVal) {
+    return equals(calc.valA, calc.equalsVal);
+  } else {
+    calc.equalsVal = calc.valB;
+    return equals(calc.valA, calc.valB);
+  }
+}
+
 // updater function
 function updater(val) {
   if (!calc[calc.current] && val === '.') val = '0.';
@@ -67,8 +76,6 @@ function clear() {
   calc.valB ? calc.valB = '' : reset('');
   screenVal('0');
 }
-
-// condenser function
 
 // commas function
 function commas(val) {
@@ -130,13 +137,7 @@ $('.ac-btn').click(function() {
 });
 
 $('.equals-btn').click(function() {
-  var val;
-  if (calc.equalsVal) {
-    val = equals(calc.valA, calc.equalsVal);
-  } else {
-    val = equals(calc.valA, calc.valB);
-    calc.equalsVal = calc.valB;
-  }
+  var val = equalsVal();
   screenVal(String(val));
   reset(val);
 });
