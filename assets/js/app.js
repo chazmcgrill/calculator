@@ -16,10 +16,11 @@ const OPS = {
 
 // variable object for input values
 var calc = {
-  operator: '',
+  operator: 'plus',
   current: 'valA',
   valA: '',
-  valB: ''
+  valB: '',
+  equalsVal: 0
 }
 
 // function for performing sum
@@ -30,6 +31,7 @@ function equals(a, b) {
 // updater function
 function updater(val) {
   if (!calc[calc.current] && val === '.') val = '0.';
+  console.log(calc[calc.current]);
   calc[calc.current] += val;
   screenVal(calc[calc.current]);
 }
@@ -125,7 +127,13 @@ $('.ac-btn').click(function() {
 });
 
 $('.equals-btn').click(function() {
-  var val = equals(calc.valA, calc.valB);
+  var val;
+  if (calc.equalsVal) {
+    val = equals(calc.valA, calc.equalsVal);
+  } else {
+    val = equals(calc.valA, calc.valB);
+    calc.equalsVal = calc.valB;
+  }
   screenVal(String(val));
   reset(val);
 });
