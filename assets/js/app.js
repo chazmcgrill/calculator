@@ -44,14 +44,19 @@ function equalsVal() {
   }
 }
 
+/* Equals reset */
+function equalsReset() {
+  calc[calc.current] = '';
+  calc.equalsVal = 0;
+}
+
 /* Updater */
 function updater(val) {
   if (!calc[calc.current] && val === '.') {
     val = '0.';
   }
   if (calc.equalsVal) {
-    calc[calc.current] = '';
-    calc.equalsVal = 0;
+    equalsReset();
   }
   if (calc[calc.current] !== '0') {
     calc[calc.current] += val;
