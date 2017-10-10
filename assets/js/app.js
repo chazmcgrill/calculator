@@ -46,12 +46,16 @@ function equalsVal() {
 
 /* Updater */
 function updater(val) {
-  if (!calc[calc.current] && val === '.') val = '0.';
+  if (!calc[calc.current] && val === '.') {
+    val = '0.';
+  }
   if (calc.equalsVal) {
     calc[calc.current] = '';
     calc.equalsVal = 0;
   }
-  calc[calc.current] += val;
+  if (calc[calc.current] !== '0') {
+    calc[calc.current] += val;
+  }
   screenVal(calc[calc.current]);
 }
 
@@ -121,7 +125,7 @@ $('.basic-ops').click(function(event) {
 
 /* Numpad */
 $('.num-pad').click(function(event) {
-  $('.ac-btn').text('C'); // better place ?
+  $('.ac-btn').text('C');
   updater(event.target.innerText);
 });
 
