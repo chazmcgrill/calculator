@@ -84,6 +84,13 @@ function lengthCheck(val) {
   if (val.length > 3) {
     val = commas(val);
   }
+  if (val.length > 25) {
+    console.log('max length reached');
+  } else if (val.length > 15) {
+    $('.screen').addClass('resize');
+  } else {
+    $('.screen').removeClass('resize');
+  }
   return val;
 }
 
