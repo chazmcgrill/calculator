@@ -75,22 +75,26 @@ function negator(val) {
 
 /* Screen display updater */
 function screenVal(val) {
-  val = lengthCheck(val);
+  val = lenghtFilter(val);
   $('.screen').text(val);
 }
 
-/* Length filter */
-function lengthCheck(val) {
-  if (val.length > 3) {
-    val = commas(val);
-  }
-  if (val.length > 25) {
+function lengthEdit(len) {
+  console.log(len);
+  if (len > 19) {
     console.log('max length reached');
-  } else if (val.length > 15) {
+  } else if (len > 12) {
     $('.screen').addClass('resize');
   } else {
     $('.screen').removeClass('resize');
   }
+}
+
+/* Length filter */
+function lenghtFilter(val) {
+  var len = val.length;
+  if (len > 3) val = commas(val);
+  lengthEdit(len);
   return val;
 }
 
