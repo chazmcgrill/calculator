@@ -110,7 +110,7 @@
 "projectAttributes": {
 	"creationDate": 528111621,
 	"displayValue": "fcc-calculator",
-	"displayValueWasSetByUser": 0,
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "brackets_purple"
 	},
 "projectSettings": {
@@ -509,7 +509,7 @@
 		},
 	"esLintConfigFileHandlingType": 0,
 	"esLintECMAVersion": 7,
-	"esLintEnvironmentsMask": 1,
+	"esLintEnvironmentsMask": 8193,
 	"esLintRules": {
 		"accessor-pairs": {
 			"active": 0,

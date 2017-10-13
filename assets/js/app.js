@@ -75,7 +75,7 @@ function negator(val) {
 
 /* Screen display updater */
 function screenVal(val) {
-  val = lenghtFilter(val);
+  val = lengthFilter(val);
   $('.screen').text(val);
 }
 
@@ -91,11 +91,10 @@ function lengthEdit(len) {
 }
 
 /* Length filter */
-function lenghtFilter(val) {
+function lengthFilter(val) {
   var len = val.length;
-  if (len > 3) val = commas(val);
   lengthEdit(len);
-  return val;
+  return len > 3 ? commas(val) : val;
 }
 
 /* Clear button logic */
