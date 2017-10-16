@@ -23,7 +23,8 @@ var calc = {
   current: 'valA',
   valA: '',
   valB: '',
-  equalsVal: 0
+  equalsVal: 0,
+  lengthLimit: false
 }
 
 // FUNCTIONS
@@ -83,6 +84,7 @@ function lengthEdit(len) {
   console.log(len);
   if (len > 19) {
     console.log('max length reached');
+    calc.lengthLimit = true;
   } else if (len > 12) {
     $('.screen').addClass('resize');
   } else {
@@ -128,6 +130,7 @@ function reset(valA) {
   calc.valA = valA;
   calc.valB = '';
   calc.current = 'valA';
+  calc.lengthLimit = false;
 }
 
 // CLICK EVENTS
@@ -140,8 +143,10 @@ $('.basic-ops').click(function(event) {
 
 /* Numpad */
 $('.num-pad').click(function(event) {
-  $('.ac-btn').text('C');
-  updater(event.target.innerText);
+  if (!calc.lengthLimit) {
+    $('.ac-btn').text('C');
+    updater(event.target.innerText);
+  }
 });
 
 /* Negate button */
