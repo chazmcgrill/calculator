@@ -80,11 +80,20 @@ function screenVal(val) {
   $('.screen').text(val);
 }
 
+function limiter(check) {
+  if (check) {
+    calc.lengthLimit = true;
+    $('.screen-message').removeClass('handle');
+  } else {
+    calc.lengthLimit = false;
+    $('.screen-message').addClass('handle');
+  }
+}
+
 function lengthEdit(len) {
   console.log(len);
   if (len > 19) {
-    console.log('max length reached');
-    calc.lengthLimit = true;
+    limiter(true);
   } else if (len > 12) {
     $('.screen').addClass('resize');
   } else {
@@ -130,7 +139,7 @@ function reset(valA) {
   calc.valA = valA;
   calc.valB = '';
   calc.current = 'valA';
-  calc.lengthLimit = false;
+  limiter(false);
 }
 
 // CLICK EVENTS
@@ -139,6 +148,7 @@ function reset(valA) {
 $('.basic-ops').click(function(event) {
   calc.operator = event.target.id;
   calc.current = 'valB';
+  limiter(false);
 });
 
 /* Numpad */
