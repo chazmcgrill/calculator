@@ -81,20 +81,19 @@ function screenVal(val) {
 }
 
 function limiter(check) {
+  calc.lengthLimit = check;
   if (check) {
-    calc.lengthLimit = true;
     $('.screen-message').removeClass('handle');
   } else {
-    calc.lengthLimit = false;
     $('.screen-message').addClass('handle');
   }
 }
 
 function lengthEdit(len) {
   console.log(len);
-  if (len > 19) {
-    limiter(true);
-  } else if (len > 12) {
+
+  if (len > 12) {
+    if (len > 19) limiter(true);
     $('.screen').addClass('resize');
   } else {
     $('.screen').removeClass('resize');
