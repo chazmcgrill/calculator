@@ -93,7 +93,7 @@ function lengthEdit(len) {
   console.log(len);
 
   if (len > 12) {
-    if (len > 19) limiter(true);
+    if (len > 20) limiter(true);
     $('.screen').addClass('resize');
   } else {
     $('.screen').removeClass('resize');
