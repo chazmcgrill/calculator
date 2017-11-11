@@ -1,1 +1,181 @@
-function equals(c,e){return OPS[calc.operator](Number(c),Number(e))}function equalsVal(){return calc.equalsVal?equals(calc.valA,calc.equalsVal):(calc.equalsVal=calc.valB,equals(calc.valA,calc.valB))}function equalsReset(){calc[calc.current]="",calc.equalsVal=0}function updater(c){calc[calc.current]||"."!==c||(c="0."),calc.equalsVal&&equalsReset(),"0"!==calc[calc.current]&&(calc[calc.current]+=c),screenVal(calc[calc.current])}function negator(c){return"0"!==c&&""!==c&&(c=-1===c.indexOf("-")?"-"+c:c.replace("-",""),screenVal(c)),c}function screenVal(c){c=lengthFilter(c),$(".screen").text(c)}function limiter(c){calc.lengthLimit=c,c?$(".screen-message").removeClass("handle"):$(".screen-message").addClass("handle")}function lengthEdit(c){console.log(c),c>12?(c>20&&limiter(!0),$(".screen").addClass("resize")):$(".screen").removeClass("resize")}function lengthFilter(c){var e=c.length;return lengthEdit(e),e>3?commas(c):c}function clear(){$(".ac-btn").text("AC"),calc.valB?calc.valB="":reset(""),screenVal("0")}function commas(c){var e=/(\d)(?=(\d{3})+$)/g,l=c.split(".");return l[0]=l[0].replace(e,"$1,"),l.join(".")}function percent(c){calc[calc.current]=calc.valB?calc.valA/100*c:c/100,screenVal(calc[calc.current])}function reset(c){calc.valA=c,calc.valB="",calc.current="valA",limiter(!1)}const OPS={plus:function(c,e){return c+e},minus:function(c,e){return c-e},multiply:function(c,e){return c*e},divide:function(c,e){return c/e}};var calc={operator:"plus",current:"valA",valA:"",valB:"",equalsVal:0,lengthLimit:!1};$(".basic-ops").click(function(c){calc.operator=c.target.id,calc.current="valB",limiter(!1)}),$(".num-pad").click(function(c){calc.lengthLimit||($(".ac-btn").text("C"),updater(c.target.innerText))}),$(".negate-btn").click(function(){calc[calc.current]=negator(String(calc[calc.current]))}),$(".percent-btn").click(function(){percent(calc[calc.current])}),$(".decimal-btn").click(function(){-1===calc[calc.current].indexOf(".")&&updater(".")}),$(".ac-btn").click(function(){clear()}),$(".equals-btn").click(function(){var c=equalsVal();screenVal(String(c)),reset(c)});
+/* Object containing methods for basic
+operations. These a called on pressing
+equals button. */
+
+const OPS = {
+  plus: (a, b) => a + b,
+  minus: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => a / b
+}
+
+/* Object to hold all the main data
+variables */
+var calc = {
+  operator: 'plus',
+  current: 'valA',
+  valA: '',
+  valB: '',
+  equalsVal: 0,
+  lengthLimit: false
+}
+
+// FUNCTIONS
+
+/* Equals function for performing sum using
+values and operator method selected. */
+function equals(a, b) {
+  return OPS[calc.operator](Number(a), Number(b));
+}
+
+/* Equals value */
+function equalsVal() {
+  if (calc.equalsVal) {
+    return equals(calc.valA, calc.equalsVal);
+  } else {
+    calc.equalsVal = calc.valB;
+    return equals(calc.valA, calc.valB);
+  }
+}
+
+/* Equals reset */
+function equalsReset() {
+  calc[calc.current] = '';
+  calc.equalsVal = 0;
+}
+
+/* Updater */
+function updater(val) {
+  if (!calc[calc.current] && val === '.') {
+    val = '0.';
+  }
+  if (calc.equalsVal) {
+    equalsReset();
+  }
+  if (calc[calc.current] !== '0') {
+    calc[calc.current] += val;
+  }
+  screenVal(calc[calc.current]);
+}
+
+/* Negator */
+function negator(val) {
+  if (val !== '0' && val !== '') {
+    val = val.indexOf('-') === -1 ? '-' + val : val.replace('-', '');
+    screenVal(val);
+  }
+  return val;
+}
+
+/* Screen display updater */
+function screenVal(val) {
+  val = lengthFilter(val);
+  $('.screen').text(val);
+}
+
+function limiter(check) {
+  calc.lengthLimit = check;
+  if (check) {
+    $('.screen-message').removeClass('handle');
+  } else {
+    $('.screen-message').addClass('handle');
+  }
+}
+
+function lengthEdit(len) {
+  console.log(len);
+
+  if (len > 12) {
+    if (len > 20) limiter(true);
+    $('.screen').addClass('resize');
+  } else {
+    $('.screen').removeClass('resize');
+  }
+}
+
+/* Length filter */
+function lengthFilter(val) {
+  var len = val.length;
+  lengthEdit(len);
+  return len > 3 ? commas(val) : val;
+}
+
+/* Clear button logic */
+function clear() {
+  $('.ac-btn').text('AC');
+  calc.valB ? calc.valB = '' : reset('');
+  screenVal('0');
+}
+
+/* Add commas to screen value using regular
+expression replace method. */
+function commas(val) {
+  var regex = /(\d)(?=(\d{3})+$)/g,
+      parts = val.split('.');
+
+  parts[0] = parts[0].replace(regex, '$1,');
+  return parts.join('.');
+}
+
+/* Percentage if valB is not populated simply
+divides by a hundred else calculates the valB's
+percentage of valA */
+function percent(val) {
+  calc[calc.current] = !calc.valB ? val / 100
+    : (calc.valA / 100) * val;
+  screenVal(calc[calc.current]);
+}
+
+/* Reset values */
+function reset(valA) {
+  calc.valA = valA;
+  calc.valB = '';
+  calc.current = 'valA';
+  limiter(false);
+}
+
+// CLICK EVENTS
+
+/* Basic operations */
+$('.basic-ops').click(function(event) {
+  calc.operator = event.target.id;
+  calc.current = 'valB';
+  limiter(false);
+});
+
+/* Numpad */
+$('.num-pad').click(function(event) {
+  if (!calc.lengthLimit) {
+    $('.ac-btn').text('C');
+    updater(event.target.innerText);
+  }
+});
+
+/* Negate button */
+$('.negate-btn').click(function() {
+  calc[calc.current] = negator(String(calc[calc.current]));
+});
+
+/* Percent */
+$('.percent-btn').click(function() {
+  percent(calc[calc.current]);
+});
+
+/* Decimal */
+$('.decimal-btn').click(function() {
+  if (calc[calc.current].indexOf('.') === -1) {
+    updater('.');
+  }
+});
+
+/* Clear button */
+$('.ac-btn').click(function() {
+  clear();
+});
+
+/* Equals button */
+$('.equals-btn').click(function() {
+  var val = equalsVal();
+  screenVal(String(val));
+  reset(val);
+});

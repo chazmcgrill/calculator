@@ -1,19 +1,12 @@
 /* Object containing methods for basic
 operations. These a called on pressing
 equals button. */
+
 const OPS = {
-  plus: function(a, b) {
-    return a + b;
-  },
-  minus: function(a, b) {
-    return a - b;
-  },
-  multiply: function(a, b) {
-    return a * b;
-  },
-  divide: function(a, b) {
-    return a / b;
-  }
+  plus: (a, b) => a + b,
+  minus: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => a / b
 }
 
 /* Object to hold all the main data
