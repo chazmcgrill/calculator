@@ -3,10 +3,18 @@ operations. These a called on pressing
 equals button. */
 
 const OPS = {
-  plus: (a, b) => a + b,
-  minus: (a, b) => a - b,
-  multiply: (a, b) => a * b,
-  divide: (a, b) => a / b
+  plus(a, b) {
+    return a + b;
+  },
+  minus(a, b) { 
+    return a - b;
+  },
+  multiply(a, b) {
+    return a * b;
+  },
+  divide(a, b) {
+    return a / b;
+  }
 }
 
 /* Object to hold all the main data
