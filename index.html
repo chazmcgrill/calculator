@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Calculator</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="stylesheet" href="resources/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+  <title>Calculator</title>
 </head>
 <body class="site">
   <div class="calc-container">
     <h1>calc.</h1>
-    <p class="screen-message handle">max screen limit reached</p>
     <div class="screen">0</div>
     <div class="buttons">
       <div>
         <button class="top-buttons ac-btn">AC</button>
         <button class="top-buttons negate-btn">+/-</button>
         <button class="top-buttons percent-btn">%</button>
-        <button class="op-buttons basic-ops" id="divide">&divide;</button>
+        <button class="op-buttons basic-ops">&divide;</button>
       </div>
       <div>
         <button class="num-pad">7</button>
         <button class="num-pad">8</button>
         <button class="num-pad">9</button>
-        <button class="op-buttons basic-ops" id="multiply">&times;</button>
+        <button class="op-buttons basic-ops">&times;</button>
       </div>
       <div>
         <button class="num-pad">4</button>
         <button class="num-pad">5</button>
         <button class="num-pad">6</button>
-        <button class="op-buttons basic-ops" id="minus">&minus;</button>
+        <button class="op-buttons basic-ops">&minus;</button>
       </div>
       <div>
         <button class="num-pad">1</button>
         <button class="num-pad">2</button>
         <button class="num-pad">3</button>
-        <button class="op-buttons basic-ops" id="plus">+</button>
+        <button class="op-buttons basic-ops">+</button>
       </div>
       <div>
         <button class="num-pad zero-btn">0</button>
@@ -72,7 +73,7 @@
 
   <!-- scripts -->
   <script src="https://use.fontawesome.com/d891ebaa12.js"></script>
-  <script src="assets/js/jquery-3.2.1.min.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="vendors/jquery-3.2.1.min.js"></script>
+  <script src="resources/js/app.js"></script>
 </body>
 </html>
