@@ -6,7 +6,7 @@ const OPS = {
   plus(a, b) {
     return a + b;
   },
-  minus(a, b) { 
+  minus(a, b) {
     return a - b;
   },
   multiply(a, b) {
@@ -19,21 +19,26 @@ const OPS = {
 
 /* Object to hold all the main data
 variables */
-var calc = {
+let calc = {
   operator: 'plus',
   current: 'valA',
   valA: '',
   valB: '',
   equalsVal: 0,
   lengthLimit: false
-}
+};
+let decimals = 8;
 
 // FUNCTIONS
+
+function rounder(value) {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+}
 
 /* Equals function for performing sum using
 values and operator method selected. */
 function equals(a, b) {
-  return OPS[calc.operator](Number(a), Number(b));
+  return rounder(OPS[calc.operator](Number(a), Number(b)));
 }
 
 /* Equals value */
@@ -91,8 +96,6 @@ function limiter(check) {
 }
 
 function lengthEdit(len) {
-  console.log(len);
-
   if (len > 12) {
     if (len > 20) limiter(true);
     $('.screen').addClass('resize');
