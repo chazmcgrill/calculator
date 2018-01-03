@@ -27,12 +27,17 @@ let calc = {
   equalsVal: 0,
   lengthLimit: false
 };
-let decimals = 8;
+
+let decimals = 12;
 
 // FUNCTIONS
 
 function rounder(value) {
-  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+  if (String(value).indexOf('e') !== -1) {
+    return value.toPrecision(1 + 12);
+  } else {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+  }
 }
 
 /* Equals function for performing sum using
@@ -59,15 +64,14 @@ function equalsReset() {
 
 /* Updater */
 function updater(val) {
-  if (!calc[calc.current] && val === '.') {
-    val = '0.';
+  if (calc.equalsVal) equalsReset();
+
+  if (calc[calc.current] === '0' || calc[calc.current] === '' && val === '.') {
+    calc[calc.current] = '0.';
+  } else {
+    calc[calc.current] += val
   }
-  if (calc.equalsVal) {
-    equalsReset();
-  }
-  if (calc[calc.current] !== '0') {
-    calc[calc.current] += val;
-  }
+
   screenVal(calc[calc.current]);
 }
 
