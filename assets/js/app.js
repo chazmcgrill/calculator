@@ -1,7 +1,5 @@
-/* Object containing methods for basic
-operations. These a called on pressing
-equals button. */
-
+/* Operations and decimal points */
+const DECIMALS = 12;
 const OPS = {
   plus(a, b) {
     return a + b;
@@ -17,8 +15,7 @@ const OPS = {
   }
 }
 
-/* Object to hold all the main data
-variables */
+/* main data variables */
 let calc = {
   operator: 'plus',
   current: 'valA',
@@ -28,15 +25,13 @@ let calc = {
   lengthLimit: false
 };
 
-let decimals = 12;
-
-// FUNCTIONS
-
+/* Function to handle floating point numbers
+whether exponential or standard notation */
 function rounder(value) {
   if (String(value).indexOf('e') !== -1) {
     return value.toPrecision(1 + 12);
   } else {
-    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+    return Number(Math.round(value + 'e' + DECIMALS) + 'e-' + DECIMALS);
   }
 }
 
@@ -46,7 +41,8 @@ function equals(a, b) {
   return rounder(OPS[calc.operator](Number(a), Number(b)));
 }
 
-/* Equals value */
+/* Decided how to handle the equals
+request. */
 function equalsVal() {
   if (calc.equalsVal) {
     return equals(calc.valA, calc.equalsVal);
@@ -56,13 +52,14 @@ function equalsVal() {
   }
 }
 
-/* Equals reset */
+/* Equals varibles reset */
 function equalsReset() {
   calc[calc.current] = '';
   calc.equalsVal = 0;
 }
 
-/* Updater */
+/* Chooses what to update the screen
+value with. */
 function updater(val) {
   if (calc.equalsVal) equalsReset();
 
@@ -75,7 +72,7 @@ function updater(val) {
   screenVal(calc[calc.current]);
 }
 
-/* Negator */
+/* Handles the negator button logic */
 function negator(val) {
   if (val !== '0' && val !== '') {
     val = val.indexOf('-') === -1 ? '-' + val : val.replace('-', '');
@@ -90,6 +87,7 @@ function screenVal(val) {
   $('.screen').text(val);
 }
 
+/* Triggers screen limit message */
 function limiter(check) {
   calc.lengthLimit = check;
   if (check) {
@@ -99,6 +97,7 @@ function limiter(check) {
   }
 }
 
+/* Adjusts font size if value is large */
 function lengthEdit(len) {
   if (len > 12) {
     if (len > 20) limiter(true);
@@ -110,7 +109,7 @@ function lengthEdit(len) {
 
 /* Length filter */
 function lengthFilter(val) {
-  var len = val.length;
+  let len = val.length;
   lengthEdit(len);
   return len > 3 ? commas(val) : val;
 }
@@ -123,9 +122,9 @@ function clear() {
 }
 
 /* Add commas to screen value using regular
-expression replace method. */
+expressions. */
 function commas(val) {
-  var regex = /(\d)(?=(\d{3})+$)/g,
+  let regex = /(\d)(?=(\d{3})+$)/g,
       parts = val.split('.');
 
   parts[0] = parts[0].replace(regex, '$1,');
@@ -136,8 +135,7 @@ function commas(val) {
 divides by a hundred else calculates the valB's
 percentage of valA */
 function percent(val) {
-  calc[calc.current] = !calc.valB ? val / 100
-    : (calc.valA / 100) * val;
+  calc[calc.current] = !calc.valB ? val / 100 : (calc.valA / 100) * val;
   screenVal(calc[calc.current]);
 }
 
@@ -148,8 +146,6 @@ function reset(valA) {
   calc.current = 'valA';
   limiter(false);
 }
-
-// CLICK EVENTS
 
 /* Basic operations */
 $('.basic-ops').click(function(event) {
@@ -190,7 +186,7 @@ $('.ac-btn').click(function() {
 
 /* Equals button */
 $('.equals-btn').click(function() {
-  var val = equalsVal();
+  let val = equalsVal();
   screenVal(String(val));
   reset(val);
 });
