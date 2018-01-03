@@ -19,8 +19,8 @@ const OPS = {
 let calc = {
   operator: 'plus',
   current: 'valA',
-  valA: '',
-  valB: '',
+  valA: '0',
+  valB: '0',
   equalsVal: 0,
   lengthLimit: false
 };
@@ -38,7 +38,10 @@ function rounder(value) {
 /* Equals function for performing sum using
 values and operator method selected. */
 function equals(a, b) {
-  return rounder(OPS[calc.operator](Number(a), Number(b)));
+  console.log(`a: ${a}, b: ${b}`);
+  let sum = OPS[calc.operator](Number(a), Number(b));
+  console.log(sum);
+  return String(sum).indexOf('.') === -1 ? sum : rounder(sum);
 }
 
 /* Decided how to handle the equals
@@ -54,17 +57,21 @@ function equalsVal() {
 
 /* Equals varibles reset */
 function equalsReset() {
-  calc[calc.current] = '';
+  calc[calc.current] = '0';
   calc.equalsVal = 0;
 }
 
-/* Chooses what to update the screen
-value with. */
+/* screen updater */
 function updater(val) {
+
+  // if equals value present remove
   if (calc.equalsVal) equalsReset();
 
-  if (calc[calc.current] === '0' || calc[calc.current] === '' && val === '.') {
+  // filter to handle proceding zeros before updating screen
+  if (calc[calc.current] === '0' && val === '.') {
     calc[calc.current] = '0.';
+  } else if (calc[calc.current] === '0' && val !== '0') {
+    calc[calc.current] = val;
   } else {
     calc[calc.current] += val
   }
@@ -117,7 +124,7 @@ function lengthFilter(val) {
 /* Clear button logic */
 function clear() {
   $('.ac-btn').text('AC');
-  calc.valB ? calc.valB = '' : reset('');
+  calc.valB ? calc.valB = '' : reset('0');
   screenVal('0');
 }
 
@@ -142,7 +149,7 @@ function percent(val) {
 /* Reset values */
 function reset(valA) {
   calc.valA = valA;
-  calc.valB = '';
+  calc.valB = '0';
   calc.current = 'valA';
   limiter(false);
 }

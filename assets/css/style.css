@@ -5,7 +5,7 @@ html {
   background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
   background-size: cover; }
 
-.site {
+body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
