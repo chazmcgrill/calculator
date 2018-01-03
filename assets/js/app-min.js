@@ -28,19 +28,27 @@ let calc = {
 /* Function to handle floating point numbers
 whether exponential or standard notation */
 function rounder(value) {
-  if (String(value).indexOf('e') !== -1) {
-    return value.toPrecision(1 + 12);
+
+  // handle mixed integers and floating point
+  let valString = String(value);
+  if (valString.split('.')[0].length > 2) {
+    return value.toFixed(2);
+
+  // handle floating point numbers
   } else {
-    return Number(Math.round(value + 'e' + DECIMALS) + 'e-' + DECIMALS);
+    if (valString.indexOf('e') !== -1) {
+      return value.toPrecision(1 + 12);
+    } else {
+      return Number(Math.round(value + 'e' + DECIMALS) + 'e-' + DECIMALS);
+    }
   }
+
 }
 
 /* Equals function for performing sum using
 values and operator method selected. */
 function equals(a, b) {
-  console.log(`a: ${a}, b: ${b}`);
   let sum = OPS[calc.operator](Number(a), Number(b));
-  console.log(sum);
   return String(sum).indexOf('.') === -1 ? sum : rounder(sum);
 }
 
@@ -72,7 +80,7 @@ function updater(val) {
     calc[calc.current] = '0.';
   } else if (calc[calc.current] === '0' && val !== '0') {
     calc[calc.current] = val;
-  } else {
+  } else if (calc[calc.current] !== '0' && val !== '0') {
     calc[calc.current] += val
   }
 
@@ -124,7 +132,7 @@ function lengthFilter(val) {
 /* Clear button logic */
 function clear() {
   $('.ac-btn').text('AC');
-  calc.valB ? calc.valB = '' : reset('0');
+  calc.valB ? calc.valB = '0' : reset('0');
   screenVal('0');
 }
 
@@ -181,7 +189,7 @@ $('.percent-btn').click(function() {
 
 /* Decimal */
 $('.decimal-btn').click(function() {
-  if (calc[calc.current].indexOf('.') === -1) {
+  if (String(calc[calc.current]).indexOf('.') === -1) {
     updater('.');
   }
 });
