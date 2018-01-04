@@ -76,6 +76,15 @@
 		"oAP": "\/index.html",
 		"oF": 0
 		},
+	"\/index.pug": {
+		"cB": 0,
+		"cOD": 1,
+		"ft": 512,
+		"oA": 0,
+		"oAP": "\/index.html",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/old\/app-min.js": {
 		"ft": 64,
 		"ma": 0,

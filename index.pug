@@ -1,0 +1,65 @@
+doctype html
+html(lang="en")
+
+head
+  title Calculator
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  link(rel="stylesheet" href="assets/css/style.css")
+
+body
+  .calc-container
+    h1 calc
+    p.screen-message.handle max screen limit reached
+    .screen 0
+
+    .buttons
+      div
+        button.top-buttons.ac-btn AC
+        button.top-buttons.negate-btn +/-
+        button.top-buttons.percent-btn %
+        button.op-buttons.basic-ops#divide &divide;
+
+      div
+        button.num-pad 7 
+        button.num-pad 8
+        button.num-pad 9
+        button.op-buttons.basic-ops#multiply &times;
+
+      div
+        button.num-pad 4
+        button.num-pad 5
+        button.num-pad 6
+        button.op-buttons.basic-ops#minus &minus;
+
+      div
+        button.num-pad 1
+        button.num-pad 2
+        button.num-pad 3
+        button.op-buttons.basic-ops#plus +
+
+      div
+        button.num-pad.zero-btn 0
+        button.decimal-btn .
+        button.op-buttons.equals-btn =
+		
+  footer.footer
+    div
+      .icons
+        a(target="_blank" href="https://www.freecodecamp.com/chazmcgrill")
+          i(aria-hidden="true").fa.fa-free-code-camp
+        a(target="_blank" href="https://twitter.com/charlietcoder")
+          i(aria-hidden="true").fa.fa-twitter
+        a(target="_blank" href="https://github.com/chazmcgrill")
+          i(aria-hidden="true").fa.fa-github
+        a(target="_blank" href="https://www.linkedin.com/in/charliejbtaylor/")
+          i(aria-hidden="true").fa.fa-linkedin
+        a(target="_blank" href="https://codepen.io/chazmcgrill/")
+          i(aria-hidden="true").fa.fa-codepen
+      p designed and coded by 
+        a(href="https://www.charlietaylorcoder.com") charlie taylor
+        
+  <!-- scripts -->
+  script(src="https://use.fontawesome.com/d891ebaa12.js")
+  script(src="assets/js/jquery-3.2.1.min.js")
+  script(src="assets/js/app.js")

@@ -28,9 +28,9 @@ let calc = {
 /* Function to handle floating point numbers
 whether exponential or standard notation */
 function rounder(value) {
+  let valString = String(value);
 
   // handle mixed integers and floating point
-  let valString = String(value);
   if (valString.split('.')[0].length > 2) {
     return value.toFixed(2);
 
