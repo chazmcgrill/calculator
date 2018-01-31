@@ -52,7 +52,7 @@ function equals(a, b) {
   return String(sum).indexOf('.') === -1 ? sum : rounder(sum);
 }
 
-/* Decided how to handle the equals
+/* Decides how to handle the equals
 request. */
 function equalsVal() {
   if (calc.equalsVal) {
@@ -164,6 +164,11 @@ function reset(valA) {
 
 /* Basic operations */
 $('.basic-ops').click(function(event) {
+  // handle chaining operations
+  if (calc.current = 'valB') {
+    calc.equalsVal = 0;
+    calc.valA = equalsVal();
+  }
   calc.operator = event.target.id;
   calc.current = 'valB';
   limiter(false);
