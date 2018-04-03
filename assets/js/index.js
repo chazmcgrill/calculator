@@ -1,4 +1,4 @@
-/* operation functions */
+// operation functions
 const OPS = {
   plus(a, b) {
     return a + b;
@@ -17,22 +17,15 @@ const OPS = {
   }
 };
 
-/* data structure */
-// const data = {
-//   vals: [0, 0],
-//   cur: 0,
-//   dec: false,
-//   op: false,
-// };
-
-function data() {
+// data constructor
+function Data() {
   this.vals = [0, 0];
   this.cur = 0;
   this.dec = false;
   this.op = false;
 }
 
-let ds = new data();
+let ds = new Data();
 
 function equals(a, op, b) {
   return Number(OPS[op](a, b).toFixed(2));
@@ -44,7 +37,14 @@ function basicOps(op) {
   ds.dec = false;
 }
 
-/* click events */
+// screen updator
+var screen = document.querySelector('.screen');
+
+function screenUpdate(val) {
+  screen.innerText = Number(val);
+}
+
+// click events
 var numBtn = document.querySelectorAll('.num-pad');
 var opsBtn = document.querySelectorAll('.ops-pad');
 
@@ -52,6 +52,7 @@ Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
+    screenUpdate(ds.vals[ds.cur]);
   });
 });
 
@@ -69,6 +70,7 @@ Array.from(opsBtn).forEach(b => {
         console.log(ds.vals[ds.cur]);
         break;
       // case "percent":
+      //   break;
       case "decimal":
         if (!ds.dec) {
           ds.dec = true;
@@ -83,6 +85,8 @@ Array.from(opsBtn).forEach(b => {
         basicOps(e.target.id);
         break;
     }
+
+    screenUpdate(ds.vals[ds.cur]);
   });
 });
 
