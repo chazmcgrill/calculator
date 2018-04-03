@@ -1,6 +1,8 @@
 var equals = require('../assets/js/index').equals;
 
 describe("Function: equals", function() {
+
+  var document = {};
   
   it("performs basic sum", function() {
     expect(equals(2,"plus",3)).toBe(5);

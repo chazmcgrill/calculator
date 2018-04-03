@@ -21,6 +21,7 @@ const OPS = {
 function Data() {
   this.vals = [0, 0];
   this.cur = 0;
+  this.eqls = { flag: false, total: 0, val: 0 }
   this.dec = false;
   this.op = false;
 }
@@ -31,10 +32,20 @@ function equals(a, op, b) {
   return Number(OPS[op](a, b).toFixed(2));
 }
 
-function basicOps(op) {
+function handleBasicOps(op) {
   ds.op = op;
   ds.cur = 1;
   ds.dec = false;
+}
+
+function handleEquals() {
+  const eqls = {
+    flag: true,
+    total: equals(Number(ds.vals[0]), ds.op, Number(ds.vals[1])),
+    val: ds.vals[1]
+  }
+  ds = new Data();
+  ds.eqls = eqls;
 }
 
 // screen updator
@@ -50,6 +61,7 @@ var opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
+    ds.eqls.flag = ds.eqls.flag ? true : false; 
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
     screenUpdate(ds.vals[ds.cur]);
@@ -68,8 +80,6 @@ Array.from(opsBtn).forEach(b => {
         ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
         console.log(ds.vals[ds.cur]);
         break;
-      // case "percent":
-      //   break;
       case "decimal":
         if (!ds.dec) {
           ds.dec = true;
@@ -78,14 +88,15 @@ Array.from(opsBtn).forEach(b => {
         console.log(ds.vals[ds.cur]);
         break;
       case "equals":
-        console.log(equals(Number(ds.vals[0]), ds.op, Number(ds.vals[1])));
+        handleEquals();
         break;
       default:
-        basicOps(e.target.id);
+        handleBasicOps(e.target.id);
         break;
     }
-
-    screenUpdate(ds.vals[ds.cur]);
+    
+    console.log(ds);
+    screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
   });
 });
 
