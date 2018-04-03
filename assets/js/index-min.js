@@ -18,29 +18,50 @@ const OPS = {
 };
 
 /* data structure */
-const data = {
-  values: [0, 0],
-  decimal: false,
-  operator: false,
+let data = {
+  vals: [0, 0],
+  cur: 0,
+  dec: false,
+  op: false,
 };
 
 function equals(a, op, b) {
   return Number(OPS[op](a, b).toFixed(2));
 }
 
+function basicNums(op) {
+  data.op = op;
+  data.cur = 1;
+}
+
 /* click events */
 var numBtn = document.querySelectorAll('.num-pad');
+var opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
-    console.log(e.target.innerText);
+    data.vals[data.cur] += e.target.innerText;
+    console.log(Number(data.vals[data.cur]));
   });
 });
 
-var opsBtn = document.querySelectorAll('.ops-pad');
-
 Array.from(opsBtn).forEach(b => {
   b.addEventListener('click', (e) => {
+    switch (e.target.id) {
+      case "plus":      
+      case "minus":
+      case "times":
+      case "divide":
+        basicNums(e.target.id);
+        break;
+      case "negate":
+        data.vals[data.cur] = OPS.negate(Number(data.vals[data.cur]));
+        console.log(data.vals[data.cur]);
+        break;
+      case "equals":
+        console.log(equals(Number(data.vals[0]), data.op, Number(data.vals[1])));
+        break;
+    }
     console.log(e.target.id);
   });
 });
