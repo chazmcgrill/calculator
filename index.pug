@@ -15,33 +15,33 @@ body
 
     .buttons
       div
-        button.top-buttons.ac-btn AC
-        button.top-buttons.negate-btn +/-
-        button.top-buttons.percent-btn %
-        button.op-buttons.basic-ops#divide &divide;
+        button.ops-pad.top-buttons#ac AC
+        button.ops-pad.top-buttons#negate +/-
+        button.ops-pad.top-buttons#percent %
+        button.ops-pad.op-buttons.basic-ops#divide &divide;
 
       div
         button.num-pad 7 
         button.num-pad 8
         button.num-pad 9
-        button.op-buttons.basic-ops#multiply &times;
+        button.ops-pad.op-buttons.basic-ops#multiply &times;
 
       div
         button.num-pad 4
         button.num-pad 5
         button.num-pad 6
-        button.op-buttons.basic-ops#minus &minus;
+        button.ops-pad.op-buttons.basic-ops#minus &minus;
 
       div
         button.num-pad 1
         button.num-pad 2
         button.num-pad 3
-        button.op-buttons.basic-ops#plus +
+        button.ops-pad.op-buttons.basic-ops#plus +
 
       div
         button.num-pad.zero-btn 0
-        button.decimal-btn .
-        button.op-buttons.equals-btn =
+        button.ops-pad#decimal .
+        button.ops-pad.op-buttons#equals =
 		
   footer.footer
     div
@@ -61,5 +61,4 @@ body
         
   <!-- scripts -->
   script(src="https://use.fontawesome.com/d891ebaa12.js")
-  script(src="assets/js/jquery-3.2.1.min.js")
-  script(src="assets/js/app.js")
+  script(src="assets/js/index.js")
