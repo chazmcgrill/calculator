@@ -24,6 +24,11 @@ const data = {
   operator: false,
 };
 
+function equals(a, op, b) {
+  return Number(OPS[op](a, b).toFixed(2));
+}
+
 module.exports = {
-  OPS: OPS
+  OPS: OPS,
+  equals: equals
 };
