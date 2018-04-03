@@ -18,21 +18,30 @@ const OPS = {
 };
 
 /* data structure */
-let data = {
-  vals: [0, 0],
-  cur: 0,
-  dec: false,
-  op: false,
-};
+// const data = {
+//   vals: [0, 0],
+//   cur: 0,
+//   dec: false,
+//   op: false,
+// };
+
+function data() {
+  this.vals = [0, 0];
+  this.cur = 0;
+  this.dec = false;
+  this.op = false;
+}
+
+let ds = new data();
 
 function equals(a, op, b) {
   return Number(OPS[op](a, b).toFixed(2));
 }
 
 function basicOps(op) {
-  data.op = op;
-  data.cur = 1;
-  data.dec = false;
+  ds.op = op;
+  ds.cur = 1;
+  ds.dec = false;
 }
 
 /* click events */
@@ -41,8 +50,8 @@ var opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
-    data.vals[data.cur] += e.target.innerText;
-    console.log(Number(data.vals[data.cur]));
+    ds.vals[ds.cur] += e.target.innerText;
+    console.log(Number(ds.vals[ds.cur]));
   });
 });
 
@@ -51,21 +60,24 @@ Array.from(opsBtn).forEach(b => {
     console.log(e.target.id);
 
     switch (e.target.id) {
-      // case "clear":
+      case "clear":
+        ds = new data();
+        console.log(ds);
+        break;
       case "negate":
-        data.vals[data.cur] = OPS.negate(Number(data.vals[data.cur]));
-        console.log(data.vals[data.cur]);
+        ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
+        console.log(ds.vals[ds.cur]);
         break;
       // case "percent":
       case "decimal":
-        if (!data.dec) {
-          data.dec = true;
-          data.vals[data.cur] += '.';
+        if (!ds.dec) {
+          ds.dec = true;
+          ds.vals[ds.cur] += '.';
         }
-        console.log(data.vals[data.cur]);
+        console.log(ds.vals[ds.cur]);
         break;
       case "equals":
-        console.log(equals(Number(data.vals[0]), data.op, Number(data.vals[1])));
+        console.log(equals(Number(ds.vals[0]), ds.op, Number(ds.vals[1])));
         break;
       default:
         basicOps(e.target.id);
