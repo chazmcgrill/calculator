@@ -29,9 +29,10 @@ function equals(a, op, b) {
   return Number(OPS[op](a, b).toFixed(2));
 }
 
-function basicNums(op) {
+function basicOps(op) {
   data.op = op;
   data.cur = 1;
+  data.dec = false;
 }
 
 /* click events */
@@ -47,22 +48,29 @@ Array.from(numBtn).forEach(n => {
 
 Array.from(opsBtn).forEach(b => {
   b.addEventListener('click', (e) => {
+    console.log(e.target.id);
+
     switch (e.target.id) {
-      case "plus":      
-      case "minus":
-      case "times":
-      case "divide":
-        basicNums(e.target.id);
-        break;
+      // case "clear":
       case "negate":
         data.vals[data.cur] = OPS.negate(Number(data.vals[data.cur]));
+        console.log(data.vals[data.cur]);
+        break;
+      // case "percent":
+      case "decimal":
+        if (!data.dec) {
+          data.dec = true;
+          data.vals[data.cur] += '.';
+        }
         console.log(data.vals[data.cur]);
         break;
       case "equals":
         console.log(equals(Number(data.vals[0]), data.op, Number(data.vals[1])));
         break;
+      default:
+        basicOps(e.target.id);
+        break;
     }
-    console.log(e.target.id);
   });
 });
 
