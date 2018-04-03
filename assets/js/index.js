@@ -62,8 +62,7 @@ Array.from(opsBtn).forEach(b => {
 
     switch (e.target.id) {
       case "clear":
-        ds = new data();
-        console.log(ds);
+        ds = new Data();
         break;
       case "negate":
         ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
