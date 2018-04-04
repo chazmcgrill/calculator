@@ -32,7 +32,18 @@ function equals(a, op, b) {
   return Number(OPS[op](a, b).toFixed(2));
 }
 
+function opsChaining() {
+  if (ds.cur === 1) {
+    ds.vals[0] = equals(Number(ds.vals[0]), ds.op, Number(ds.vals[1]));
+    ds.vals[1] = 0;
+  } else if (ds.eqls.flag) {
+    ds.vals[0] = ds.eqls.total;
+    ds.vals[1] = 0;
+  }
+}
+
 function handleBasicOps(op) {
+  opsChaining();
   ds.op = op;
   ds.cur = 1;
   ds.dec = false;
