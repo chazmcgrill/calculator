@@ -122,9 +122,3 @@ Array.from(opsBtn).forEach(b => {
     screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
   });
 });
-
-/* export for testing */
-module.exports = {
-  OPS: OPS,
-  equals: equals
-};

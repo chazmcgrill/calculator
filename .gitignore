@@ -35,5 +35,6 @@ Temporary Items
 # Directories
 old
 node_modules
+lib
 
 # End of https://www.gitignore.io/api/osx,sass

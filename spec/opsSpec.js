@@ -1,6 +1,4 @@
-var OPS = require('../assets/js/index').OPS;
-
-describe("OPS functions", function() {
+describe("OPS functions:", function() {
 
   it("plus function works", function() {
     expect(OPS.plus(2, 3)).toBe(5);

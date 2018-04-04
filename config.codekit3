@@ -75,11 +75,56 @@
 		"oF": 1,
 		"oS": 0
 		},
-	"\/node_modules": {
-		"ft": 65536,
-		"oA": 2,
-		"oAP": "\/build\/node_modules",
-		"oF": 0
+	"\/lib\/jasmine-3.1.0\/boot.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/lib\/jasmine-3.1.0\/boot-min.js",
+		"oF": 1,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/lib\/jasmine-3.1.0\/jasmine-html.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/lib\/jasmine-3.1.0\/jasmine-html-min.js",
+		"oF": 1,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/lib\/jasmine-3.1.0\/jasmine.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/lib\/jasmine-3.1.0\/jasmine-min.css",
+		"oF": 1,
+		"oS": 3
+		},
+	"\/lib\/jasmine-3.1.0\/jasmine.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/lib\/jasmine-3.1.0\/jasmine-min.js",
+		"oF": 1,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/lib\/jasmine-3.1.0\/jasmine_favicon.png": {
+		"ft": 32768,
+		"iS": 1486,
+		"oA": 1,
+		"oAP": "\/lib\/jasmine-3.1.0\/jasmine_favicon.png",
+		"oF": 1,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
 		},
 	"\/old\/assets\/css\/style.css": {
 		"aP": 1,
@@ -150,22 +195,6 @@
 		"oF": 1,
 		"oS": 0
 		},
-	"\/package-lock.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "\/package-lock-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"\/package.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "\/package-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
 	"\/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -204,13 +233,12 @@
 		"sC": 3,
 		"tS": 0
 		},
-	"\/spec\/support\/jasmine.json": {
-		"ft": 524288,
+	"\/SpecRunner.html": {
+		"cB": 0,
+		"ft": 8192,
 		"oA": 1,
-		"oAP": "\/spec\/support\/jasmine-min.json",
-		"oF": 1,
-		"oO": 0,
-		"oS": 1
+		"oAP": "\/SpecRunner.html",
+		"oF": 1
 		}
 	},
 "hooks": [
@@ -620,7 +648,7 @@
 		},
 	"esLintConfigFileHandlingType": 0,
 	"esLintECMAVersion": 7,
-	"esLintEnvironmentsMask": 1,
+	"esLintEnvironmentsMask": 273,
 	"esLintRules": {
 		"accessor-pairs": {
 			"active": 0,
