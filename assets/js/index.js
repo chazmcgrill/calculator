@@ -29,17 +29,23 @@ function Data() {
 let ds = new Data();
 
 function equals(a, op, b) {
-  return Number(OPS[op](a, b).toFixed(2));
+  return Number(OPS[op](Number(a), Number(b)).toFixed(2));
 }
 
 function opsChaining() {
   if (ds.cur === 1) {
-    ds.vals[0] = equals(Number(ds.vals[0]), ds.op, Number(ds.vals[1]));
+    ds.vals[0] = equals(ds.vals[0], ds.op, ds.vals[1]);
     ds.vals[1] = 0;
   } else if (ds.eqls.flag) {
     ds.vals[0] = ds.eqls.total;
     ds.vals[1] = 0;
   }
+}
+
+function eqlsChaining() {
+  ds.vals[0] = ds.eqls.total;
+  ds.op = ds.eqls.op;
+  ds.vals[1] = ds.eqls.val;
 }
 
 function handleBasicOps(op) {
@@ -50,20 +56,20 @@ function handleBasicOps(op) {
 }
 
 function handleEquals() {
+  if (ds.eqls.flag) eqlsChaining();
   const eqls = {
     flag: true,
-    total: equals(Number(ds.vals[0]), ds.op, Number(ds.vals[1])),
-    val: ds.vals[1]
+    total: equals(ds.vals[0], ds.op, ds.vals[1]),
+    val: ds.vals[1],
+    op: ds.op
   }
   ds = new Data();
   ds.eqls = eqls;
 }
 
 function handleDecimal() {
-  if (!ds.dec) {
-    ds.dec = true;
-    ds.vals[ds.cur] += '.';
-  }
+  ds.dec = true;
+  ds.vals[ds.cur] += '.';
 }
 
 function handleNegate() {
@@ -102,7 +108,7 @@ Array.from(opsBtn).forEach(b => {
         handleNegate();
         break;
       case "decimal":
-        handleDecimal();
+        if (!ds.dec) handleDecimal();
         break;
       case "equals":
         handleEquals();
