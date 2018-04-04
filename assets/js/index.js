@@ -56,7 +56,7 @@ function handleBasicOps(op) {
 }
 
 function handleEquals() {
-  if (ds.eqls.flag) eqlsChaining();
+  if (ds.eqls.flag && !ds.op) eqlsChaining();
   const eqls = {
     flag: true,
     total: equals(ds.vals[0], ds.op, ds.vals[1]),
@@ -77,15 +77,15 @@ function handleNegate() {
 }
 
 // screen updator
-var screen = document.querySelector('.screen');
+const screen = document.querySelector('.screen');
 
 function screenUpdate(val) {
   screen.innerText = Number(val);
 }
 
 // click events
-var numBtn = document.querySelectorAll('.num-pad');
-var opsBtn = document.querySelectorAll('.ops-pad');
+const numBtn = document.querySelectorAll('.num-pad');
+const opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
