@@ -43,7 +43,7 @@ function opsChaining() {
 }
 
 function handleBasicOps(op) {
-  opsChaining();
+  if (ds.cur === 1 || ds.eqls.flag) opsChaining();
   ds.op = op;
   ds.cur = 1;
   ds.dec = false;
@@ -57,6 +57,17 @@ function handleEquals() {
   }
   ds = new Data();
   ds.eqls = eqls;
+}
+
+function handleDecimal() {
+  if (!ds.dec) {
+    ds.dec = true;
+    ds.vals[ds.cur] += '.';
+  }
+}
+
+function handleNegate() {
+  ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
 }
 
 // screen updator
@@ -81,28 +92,23 @@ Array.from(numBtn).forEach(n => {
 
 Array.from(opsBtn).forEach(b => {
   b.addEventListener('click', (e) => {
-    console.log(e.target.id);
+    const opsId = e.target.id;
 
-    switch (e.target.id) {
+    switch (opsId) {
       case "clear":
         ds = new Data();
         break;
       case "negate":
-        ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
-        console.log(ds.vals[ds.cur]);
+        handleNegate();
         break;
       case "decimal":
-        if (!ds.dec) {
-          ds.dec = true;
-          ds.vals[ds.cur] += '.';
-        }
-        console.log(ds.vals[ds.cur]);
+        handleDecimal();
         break;
       case "equals":
         handleEquals();
         break;
       default:
-        handleBasicOps(e.target.id);
+        handleBasicOps(opsId);
         break;
     }
     
