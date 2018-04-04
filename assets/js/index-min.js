@@ -76,6 +76,12 @@ function handleNegate() {
   ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
 }
 
+function handlePercent() {
+  ds.vals[ds.cur] = ds.cur === 0
+    ? ds.vals[0] / 100
+    : (ds.vals[1] / 100) * ds.vals[0];
+}
+
 // screen updator
 const screen = document.querySelector('.screen');
 
@@ -107,6 +113,9 @@ Array.from(opsBtn).forEach(b => {
       case "negate":
         handleNegate();
         break;
+      case "percent":
+        handlePercent();
+        break;
       case "decimal":
         if (!ds.dec) handleDecimal();
         break;
@@ -118,7 +127,7 @@ Array.from(opsBtn).forEach(b => {
         break;
     }
     
-    console.log(ds);
+    console.log(ds.eqls);
     screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
   });
 });
