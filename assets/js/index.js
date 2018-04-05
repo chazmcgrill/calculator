@@ -33,6 +33,7 @@ function equals(a, op, b) {
   return Number(sum >= 100 ? sum.toFixed(2) : sum.toFixed(12));
 }
 
+// chaining events
 function opsChaining() {
   if (ds.cur === 1) {
     ds.vals[0] = equals(ds.vals[0], ds.op, ds.vals[1]);
@@ -132,6 +133,7 @@ Array.from(opsBtn).forEach(b => {
         break;
     }
     
+    console.log(ds);
     console.log(ds.eqls);
     screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
   });
