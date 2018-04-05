@@ -22,18 +22,41 @@ describe("Handler functions:", () => {
 	});
 	
 	describe("percent", () => {
-		it("val[0] becomes a percentage of 100", () => {
-			ds.vals[ds.cur] = 50;
+		it("current val becomes a percentage of 100", () => {
+			ds = { ...ds, cur: 0, vals: [50, 0] };
 			handlePercent();
 			expect(ds.vals[ds.cur]).toBe(0.5);
 		});
 
-		it("val[1] becomes a percentage of val[0]", () => {
-			ds.cur = 1
-			ds.vals[ds.cur] = 10;
+		it("current val becomes its percentage of stored val", () => {
+			ds = { ...ds, cur: 1, vals: [50, 10] };
 			handlePercent();
-			expect(ds.vals[ds.cur]).toBe(0.05);
+			expect(ds.vals[ds.cur]).toBe(5);
 		});
 	});
 
+	describe("negate", () => {
+		it("negates current val", () => {
+			ds = { ...ds, cur: 0, vals: [50, 0] };
+			handleNegate();
+			expect(ds.vals[ds.cur]).toBe(-50)
+		});
+
+		it("negates equals val")
+	});
+
+	describe("equals", () => {
+		it("performs basic operations", () => {
+			ds = { ...ds, cur: 1, vals: [3, 4], op: "times" };
+			handleEquals();
+			expect(ds.eqls.total).toBe(12);
+		});
+
+		it("chains previous operations", () => {
+			ds = { ...ds, eqls: { flag: true, op: "times", total: 12, val: 4 } };
+			handleEquals();
+			expect(ds.eqls.total).toBe(48);
+		});
+
+	});
 });
