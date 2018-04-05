@@ -48,11 +48,23 @@ function eqlsChaining() {
   ds.vals[1] = ds.eqls.val;
 }
 
-function handleBasicOps(op) {
-  if (ds.cur === 1 || ds.eqls.flag) opsChaining();
-  ds.op = op;
-  ds.cur = 1;
-  ds.dec = false;
+// click handler functions
+function handleClear() {
+  ds = new Data();
+}
+
+function handleNegate() {
+  ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
+}
+
+function handlePercent() {
+  ds.vals[ds.cur] = ds.cur === 0 ? ds.vals[0] / 100
+    : (ds.vals[1] / 100) * ds.vals[0];
+}
+
+function handleDecimal() {
+  ds.dec = true;
+  ds.vals[ds.cur] += '.';
 }
 
 function handleEquals() {
@@ -67,19 +79,11 @@ function handleEquals() {
   ds.eqls = eqls;
 }
 
-function handleDecimal() {
-  ds.dec = true;
-  ds.vals[ds.cur] += '.';
-}
-
-function handleNegate() {
-  ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
-}
-
-function handlePercent() {
-  ds.vals[ds.cur] = ds.cur === 0
-    ? ds.vals[0] / 100
-    : (ds.vals[1] / 100) * ds.vals[0];
+function handleBasicOps(op) {
+  if (ds.cur === 1 || ds.eqls.flag) opsChaining();
+  ds.op = op;
+  ds.cur = 1;
+  ds.dec = false;
 }
 
 // screen updator
@@ -108,7 +112,7 @@ Array.from(opsBtn).forEach(b => {
 
     switch (opsId) {
       case "clear":
-        ds = new Data();
+        handleClear();
         break;
       case "negate":
         handleNegate();
