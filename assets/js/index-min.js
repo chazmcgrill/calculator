@@ -29,7 +29,8 @@ function Data() {
 let ds = new Data();
 
 function equals(a, op, b) {
-  return Number(OPS[op](Number(a), Number(b)).toFixed(2));
+  let sum = Number(OPS[op](Number(a), Number(b)));
+  return Number(sum >= 100 ? sum.toFixed(2) : sum.toFixed(12));
 }
 
 function opsChaining() {
@@ -48,11 +49,23 @@ function eqlsChaining() {
   ds.vals[1] = ds.eqls.val;
 }
 
-function handleBasicOps(op) {
-  if (ds.cur === 1 || ds.eqls.flag) opsChaining();
-  ds.op = op;
-  ds.cur = 1;
-  ds.dec = false;
+// click handler functions
+function handleClear() {
+  ds = new Data();
+}
+
+function handleNegate() {
+  ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
+}
+
+function handlePercent() {
+  ds.vals[ds.cur] = ds.cur === 0 ? ds.vals[0] / 100
+    : (ds.vals[1] / 100) * ds.vals[0];
+}
+
+function handleDecimal() {
+  ds.dec = true;
+  ds.vals[ds.cur] += '.';
 }
 
 function handleEquals() {
@@ -67,19 +80,11 @@ function handleEquals() {
   ds.eqls = eqls;
 }
 
-function handleDecimal() {
-  ds.dec = true;
-  ds.vals[ds.cur] += '.';
-}
-
-function handleNegate() {
-  ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
-}
-
-function handlePercent() {
-  ds.vals[ds.cur] = ds.cur === 0
-    ? ds.vals[0] / 100
-    : (ds.vals[1] / 100) * ds.vals[0];
+function handleBasicOps(op) {
+  if (ds.cur === 1 || ds.eqls.flag) opsChaining();
+  ds.op = op;
+  ds.cur = 1;
+  ds.dec = false;
 }
 
 // screen updator
@@ -94,7 +99,7 @@ const numBtn = document.querySelectorAll('.num-pad');
 const opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
-  n.addEventListener('click', (e) => {
+  n.addEventListener('click', (e) => { 
     ds.eqls.flag = ds.eqls.flag ? true : false; 
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
@@ -108,7 +113,7 @@ Array.from(opsBtn).forEach(b => {
 
     switch (opsId) {
       case "clear":
-        ds = new Data();
+        handleClear();
         break;
       case "negate":
         handleNegate();

@@ -29,7 +29,8 @@ function Data() {
 let ds = new Data();
 
 function equals(a, op, b) {
-  return Number(OPS[op](Number(a), Number(b)).toFixed(2));
+  let sum = Number(OPS[op](Number(a), Number(b)));
+  return Number(sum >= 100 ? sum.toFixed(2) : sum.toFixed(12));
 }
 
 function opsChaining() {
@@ -98,7 +99,7 @@ const numBtn = document.querySelectorAll('.num-pad');
 const opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
-  n.addEventListener('click', (e) => {
+  n.addEventListener('click', (e) => { 
     ds.eqls.flag = ds.eqls.flag ? true : false; 
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
