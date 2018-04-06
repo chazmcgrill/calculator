@@ -56,7 +56,11 @@ function handleClear() {
 }
 
 function handleNegate() {
-  ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
+  if (ds.eqls.flag) {
+    ds.eqls.total = OPS.negate(Number(ds.eqls.total));
+  } else {
+    ds.vals[ds.cur] = OPS.negate(Number(ds.vals[ds.cur]));
+  }
 }
 
 function handlePercent() {
