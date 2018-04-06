@@ -52,7 +52,11 @@ function eqlsChaining() {
 
 // click handler functions
 function handleClear() {
-  ds = new Data();
+  if (ds.cur === 1) {
+    ds.vals[ds.cur] = 0;
+  } else {
+    ds = new Data();
+  }
 }
 
 function handleNegate() {

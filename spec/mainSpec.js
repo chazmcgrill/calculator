@@ -69,4 +69,20 @@ describe("Handler functions:", () => {
 		});
 	});
 
+	describe("clear", () => {
+		it("clears everything if one value", () => {
+			ds = { ...ds, vals: [3, 0] };
+			handleClear();
+			expect(ds).toEqual(new Data());
+		});
+
+		it("doesn't clear everything if two values", () => {
+			ds = { ...ds, cur: 1, vals: [3, 2] };
+			handleClear();
+			expect(ds.vals).toEqual([3, 0]);
+		});
+		
+		it("only clears current value when following equals")
+	});
+
 });
