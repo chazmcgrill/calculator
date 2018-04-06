@@ -104,8 +104,8 @@ const numBtn = document.querySelectorAll('.num-pad');
 const opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
-  n.addEventListener('click', (e) => { 
-    ds.eqls.flag = ds.eqls.flag ? true : false; 
+  n.addEventListener('click', (e) => {
+    if (ds.eqls.flag) ds.eqls.flag = false;
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
     screenUpdate(ds.vals[ds.cur]);
