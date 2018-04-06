@@ -24,6 +24,7 @@ function Data() {
   this.eqls = { flag: false, total: 0, val: 0 }
   this.dec = false;
   this.op = false;
+  this.clr = false;
 }
 
 let ds = new Data();
@@ -51,8 +52,11 @@ function eqlsChaining() {
 }
 
 // click handler functions
+const clrBtn = document.querySelector('#clear');
+
 function handleClear() {
-  if (ds.cur === 1) {
+  if (ds.cur === 1 && !ds.clr) {
+    ds.clr = true;
     ds.vals[ds.cur] = 0;
   } else {
     ds = new Data();

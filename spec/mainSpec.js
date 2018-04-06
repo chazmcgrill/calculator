@@ -21,7 +21,7 @@ describe("Handler functions:", () => {
 		ds = new Data();
 	});
 	
-	describe("percent", () => {
+	describe("percent:", () => {
 		it("converts current value to a percentage", () => {
 			ds = { ...ds, cur: 0, vals: [50, 0] };
 			handlePercent();
@@ -41,7 +41,7 @@ describe("Handler functions:", () => {
 		});
 	});
 
-	describe("negate", () => {
+	describe("negate:", () => {
 		it("negates current val", () => {
 			ds = { ...ds, cur: 0, vals: [50, 0] };
 			handleNegate();
@@ -55,7 +55,7 @@ describe("Handler functions:", () => {
 		});
 	});
 
-	describe("equals", () => {
+	describe("equals:", () => {
 		it("performs basic operations", () => {
 			ds = { ...ds, cur: 1, vals: [3, 4], op: "times" };
 			handleEquals();
@@ -69,7 +69,7 @@ describe("Handler functions:", () => {
 		});
 	});
 
-	describe("clear", () => {
+	describe("clear:", () => {
 		it("clears everything if one value", () => {
 			ds = { ...ds, vals: [3, 0] };
 			handleClear();
@@ -81,8 +81,12 @@ describe("Handler functions:", () => {
 			handleClear();
 			expect(ds.vals).toEqual([3, 0]);
 		});
-		
-		it("only clears current value when following equals")
-	});
 
+		it("clears everything if two values and called twice", () => {
+			ds = { ...ds, cur: 1, vals: [3, 2] };
+			handleClear();
+			handleClear();
+			expect(ds).toEqual(new Data());
+		});
+	});
 });
