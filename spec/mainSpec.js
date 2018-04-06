@@ -22,16 +22,22 @@ describe("Handler functions:", () => {
 	});
 	
 	describe("percent", () => {
-		it("converts current val to a percentage of 100", () => {
+		it("converts current value to a percentage", () => {
 			ds = { ...ds, cur: 0, vals: [50, 0] };
 			handlePercent();
 			expect(ds.vals[ds.cur]).toBe(0.5);
 		});
 
-		it("converts current val to a percentage of stored val", () => {
+		it("converts current value to a percentage of stored value", () => {
 			ds = { ...ds, cur: 1, vals: [50, 10] };
 			handlePercent();
 			expect(ds.vals[ds.cur]).toBe(5);
+		});
+
+		it("converts equals to a percentage", () => {
+			ds = { ...ds, eqls: { flag: true, op: "times", total: 50, val: 4 } };
+			handlePercent();
+			expect(ds.eqls.total).toBe(0.5);
 		});
 	});
 
@@ -61,6 +67,6 @@ describe("Handler functions:", () => {
 			handleEquals();
 			expect(ds.eqls.total).toBe(48);
 		});
-
 	});
+
 });

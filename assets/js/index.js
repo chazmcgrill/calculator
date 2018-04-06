@@ -64,8 +64,11 @@ function handleNegate() {
 }
 
 function handlePercent() {
-  ds.vals[ds.cur] = ds.cur === 0 ? ds.vals[0] / 100
-    : (ds.vals[1] / 100) * ds.vals[0];
+  if (ds.eqls.flag) {
+    ds.eqls.total = ds.eqls.total / 100;
+  } else {
+    ds.vals[ds.cur] = ds.cur === 0 ? ds.vals[0] / 100 : (ds.vals[1] / 100) * ds.vals[0];
+  }
 }
 
 function handleDecimal() {
