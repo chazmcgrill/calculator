@@ -61,6 +61,7 @@ function handleClear() {
   } else {
     ds = new Data();
   }
+  clrBtn.innerText = 'AC'
 }
 
 function handleNegate() {
@@ -116,6 +117,7 @@ const opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
+    clrBtn.innerText = 'C'
     if (ds.eqls.flag) ds.eqls.flag = false;
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
