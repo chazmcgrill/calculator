@@ -52,7 +52,7 @@ function eqlsChaining() {
 }
 
 // click handler functions
-const clrBtn = document.querySelector('#clear');
+const clrBtn = document.getElementById('#clear');
 
 function handleClear() {
   if (ds.cur === 1 && !ds.clr) {
@@ -61,7 +61,6 @@ function handleClear() {
   } else {
     ds = new Data();
   }
-  clrBtn.innerText = 'AC'
 }
 
 function handleNegate() {
@@ -132,6 +131,7 @@ Array.from(opsBtn).forEach(b => {
     switch (opsId) {
       case "clear":
         handleClear();
+        clrBtn.innerText = 'AC';
         break;
       case "negate":
         handleNegate();
