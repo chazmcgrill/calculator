@@ -114,45 +114,51 @@ function screenUpdate(val) {
 const numBtn = document.querySelectorAll('.num-pad');
 const opsBtn = document.querySelectorAll('.ops-pad');
 
+function numberEventHandler(num) {
+  clrBtn.innerText = 'C';
+  if (ds.eqls.flag) ds.eqls.flag = false;
+  ds.vals[ds.cur] += num;
+  console.log(Number(ds.vals[ds.cur]));
+  screenUpdate(ds.vals[ds.cur]);
+}
+
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
-    clrBtn.innerText = 'C';
-    if (ds.eqls.flag) ds.eqls.flag = false;
-    ds.vals[ds.cur] += e.target.innerText;
-    console.log(Number(ds.vals[ds.cur]));
-    screenUpdate(ds.vals[ds.cur]);
+    numberEventHandler(e.target.innerText);
   });
 });
 
+function opsEventHandler(opsId) {
+  switch (opsId) {
+    case "clear":
+      handleClear();
+      clrBtn.innerText = 'AC';
+      break;
+    case "negate":
+      handleNegate();
+      break;
+    case "percent":
+      handlePercent();
+      break;
+    case "decimal":
+      if (!ds.dec) handleDecimal();
+      break;
+    case "equals":
+      handleEquals();
+      break;
+    default:
+      handleBasicOps(opsId);
+      break;
+  }
+
+  console.log(ds);
+  console.log(ds.eqls);
+  screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
+}
+
 Array.from(opsBtn).forEach(b => {
   b.addEventListener('click', (e) => {
-    const opsId = e.target.id;
-
-    switch (opsId) {
-      case "clear":
-        handleClear();
-        clrBtn.innerText = 'AC';
-        break;
-      case "negate":
-        handleNegate();
-        break;
-      case "percent":
-        handlePercent();
-        break;
-      case "decimal":
-        if (!ds.dec) handleDecimal();
-        break;
-      case "equals":
-        handleEquals();
-        break;
-      default:
-        handleBasicOps(opsId);
-        break;
-    }
-    
-    console.log(ds);
-    console.log(ds.eqls);
-    screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
+    opsEventHandler(e.target.id)
   });
 });
 
@@ -171,7 +177,6 @@ function convertKeyCode(code) {
     case ".":
       return "decimal";
     case "=":
-    case "Enter":
       return "equals";
     case "Backspace":
       return "clear";
@@ -179,9 +184,9 @@ function convertKeyCode(code) {
 }
 
 function keyEvents(event) {
-  if (event.key.match(/[\+-\/.*%=]/) || event.keyCode === 8 || event.keyCode === 13) {
-    console.log(convertKeyCode(event.key));
+  if (event.key.match(/[\+-\/.*%=]/) || event.keyCode === 8) {
+    opsEventHandler(convertKeyCode(event.key));
   } else if (event.keyCode >= 48 && event.keyCode <= 57) {
-    console.log("number");
+    numberEventHandler(event.key);
   }
 }
