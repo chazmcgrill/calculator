@@ -86,14 +86,16 @@ function handleDecimal() {
 
 function handleEquals() {
   if (ds.eqls.flag && !ds.op) eqlsChaining();
-  const eqls = {
-    flag: true,
-    total: equals(ds.vals[0], ds.op, ds.vals[1]),
-    val: ds.vals[1],
-    op: ds.op
+  if (ds.op) {
+    const eqls = {
+      flag: true,
+      total: equals(ds.vals[0], ds.op, ds.vals[1]),
+      val: ds.vals[1],
+      op: ds.op
+    }
+    ds = new Data();
+    ds.eqls = eqls;
   }
-  ds = new Data();
-  ds.eqls = eqls;
 }
 
 function handleBasicOps(op) {
