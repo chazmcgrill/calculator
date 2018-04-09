@@ -52,7 +52,7 @@ function eqlsChaining() {
 }
 
 // click handler functions
-const clrBtn = document.getElementById('#clear');
+const clrBtn = document.getElementById('clear');
 
 function handleClear() {
   if (ds.cur === 1 && !ds.clr) {
@@ -116,7 +116,7 @@ const opsBtn = document.querySelectorAll('.ops-pad');
 
 Array.from(numBtn).forEach(n => {
   n.addEventListener('click', (e) => {
-    clrBtn.innerText = 'C'
+    clrBtn.innerText = 'C';
     if (ds.eqls.flag) ds.eqls.flag = false;
     ds.vals[ds.cur] += e.target.innerText;
     console.log(Number(ds.vals[ds.cur]));
@@ -155,3 +155,33 @@ Array.from(opsBtn).forEach(b => {
     screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
   });
 });
+
+window.addEventListener("keydown", keyEvents, false);
+
+function convertKeyCode(code) {
+  switch (code) {
+    case "-":
+      return "minus";
+    case "+":
+      return "plus";
+    case "*":
+      return "times";
+    case "%":
+      return "percent";
+    case ".":
+      return "decimal";
+    case "=":
+    case "Enter":
+      return "equals";
+    case "Backspace":
+      return "clear";
+  }
+}
+
+function keyEvents(event) {
+  if (event.key.match(/[\+-\/.*%=]/) || event.keyCode === 8 || event.keyCode === 13) {
+    console.log(convertKeyCode(event.key));
+  } else if (event.keyCode >= 48 && event.keyCode <= 57) {
+    console.log("number");
+  }
+}
