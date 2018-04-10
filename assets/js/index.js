@@ -193,6 +193,7 @@ function convertKeyCode(code) {
 }
 
 function keyEvents(event) {
+  event.preventDefault();
   if (event.key.match(/[\+-\/.*%=]/) || event.keyCode === 8) {
     opsEventHandler(convertKeyCode(event.key));
   } else if (event.keyCode >= 48 && event.keyCode <= 57) {
