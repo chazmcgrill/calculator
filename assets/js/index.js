@@ -109,7 +109,14 @@ function handleBasicOps(op) {
 const screen = document.querySelector('.screen');
 
 function screenUpdate(val) {
-  screen.innerText = Number(val);
+  const num = Number(val);
+  screen.innerText = num > 999 ? addCommas(num) : num;
+}
+
+function addCommas(val) {
+  let parts = String(val).split('.');
+  parts[0] = parts[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+  return parts.join('.');
 }
 
 // click events
