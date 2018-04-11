@@ -106,10 +106,11 @@ function handleBasicOps(op) {
 }
 
 // screen updator
-const screen = document.querySelector('.screen');
+const screen = document.getElementById('screen');
 
 function screenUpdate(val) {
   const num = Number(val);
+  screen.classList = String(val).length > 13 ? 'resize' : '';
   screen.innerText = num > 999 ? addCommas(num) : num;
 }
 

@@ -1,9 +1,12 @@
 # JavaScript Calculator
 
-Calculator built using javascript and jquery for DOM manipulation.
-Styling created using pre-compiler sass.
+Calculator built using javascript, markup and styling created 
+using pre-compiled sass and pug. Test driven development using 
+Jasmine as a test runner.
 
 key features:
 - Performs general arithmetic
-- Chains multiple sums together
-- Handles floating point numbers
+- Handles Percentage, Negation, Clear
+- Chains operations and equals events 
+- Floating point numbers
+- Click and keypress events
