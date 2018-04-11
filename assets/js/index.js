@@ -182,6 +182,8 @@ function convertKeyCode(code) {
       return "plus";
     case "*":
       return "times";
+    case "/":
+      return "divide";
     case "%":
       return "percent";
     case ".":
