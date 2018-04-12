@@ -65,67 +65,6 @@
 		"oF": 1,
 		"oS": 0
 		},
-	"\/lib\/jasmine-3.1.0\/boot.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/lib\/jasmine-3.1.0\/boot-min.js",
-		"oF": 1,
-		"sC": 3,
-		"tS": 0
-		},
-	"\/lib\/jasmine-3.1.0\/jasmine-html.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/lib\/jasmine-3.1.0\/jasmine-html-min.js",
-		"oF": 1,
-		"sC": 3,
-		"tS": 0
-		},
-	"\/lib\/jasmine-3.1.0\/jasmine.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/lib\/jasmine-3.1.0\/jasmine-min.css",
-		"oF": 1,
-		"oS": 3
-		},
-	"\/lib\/jasmine-3.1.0\/jasmine.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/lib\/jasmine-3.1.0\/jasmine-min.js",
-		"oF": 1,
-		"sC": 3,
-		"tS": 0
-		},
-	"\/lib\/jasmine-3.1.0\/jasmine_favicon.png": {
-		"ft": 32768,
-		"iS": 1486,
-		"oA": 1,
-		"oAP": "\/lib\/jasmine-3.1.0\/jasmine_favicon.png",
-		"oF": 1,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/old\/app.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/old\/app-min.js",
-		"oF": 1,
-		"sC": 3,
-		"tS": 0
-		},
 	"\/README.md": {
 		"cB": 0,
 		"cS": 0,

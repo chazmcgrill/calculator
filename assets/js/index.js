@@ -128,7 +128,6 @@ function numberEventHandler(num) {
   clrBtn.innerText = 'C';
   if (ds.eqls.flag) ds.eqls.flag = false;
   ds.vals[ds.cur] += num;
-  console.log(Number(ds.vals[ds.cur]));
   screenUpdate(ds.vals[ds.cur]);
 }
 
@@ -139,6 +138,7 @@ Array.from(numBtn).forEach(n => {
 });
 
 function opsEventHandler(opsId) {
+  let tempScreen = null; 
   switch (opsId) {
     case "clear":
       handleClear();
@@ -157,13 +157,15 @@ function opsEventHandler(opsId) {
       handleEquals();
       break;
     default:
+      tempScreen = ds.vals[ds.cur];
       handleBasicOps(opsId);
       break;
   }
 
-  console.log(ds);
-  console.log(ds.eqls);
-  screenUpdate(ds.eqls.flag ? ds.eqls.total : ds.vals[ds.cur]);
+  // basic ops require previous value shown
+  tempScreen = tempScreen ? tempScreen : ds.vals[ds.cur];
+
+  screenUpdate(ds.eqls.flag ? ds.eqls.total : tempScreen);
 }
 
 Array.from(opsBtn).forEach(b => {
